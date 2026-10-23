@@ -1,0 +1,902 @@
+<title>El Kiosko Agencia</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="El Kiosko, agencia de marketing: páginas web, branding y redes sociales.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400..800;1,500..800&family=Inter:wght@400..600&family=Caveat:wght@500..700&display=swap">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+/* Layout: editorial a sangre sobre negro absoluto; titulares enormes, rejilla de 12 columnas, ritmo vertical amplio */
+:root{
+  --ink:#0B0B0B;      /* negro profundo (principal) */
+  --ink-2:#161616;    /* superficies */
+  --line:#2C2C2C;     /* filetes */
+  --mute:#A0A0A0;     /* gris neutro (textos secundarios) */
+  --bone:#F6F5F0;     /* blanco roto */
+  --accent:#A78BFA;   /* lavanda (acento) */
+  --accent-ink:#0B0B0B;
+  --f-display:"Montserrat","Helvetica Neue",Arial,sans-serif;
+  --f-body:"Inter","Helvetica Neue",Arial,sans-serif;
+  --f-serif:var(--f-display);
+  --f-mono:var(--f-display);
+  --pad:clamp(16px,4vw,56px);
+  --ease:cubic-bezier(.76,0,.24,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{overflow-x:clip}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--bone);font-family:var(--f-display);font-size:16px;line-height:1.55;font-variation-settings:"wdth" 100;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--ink)}
+::selection{background:var(--accent);color:var(--accent-ink)}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+:focus-visible{outline:1px solid var(--accent);outline-offset:4px}
+.wrap{padding-left:max(var(--pad),env(safe-area-inset-left,0px));padding-right:max(var(--pad),env(safe-area-inset-right,0px))}
+.mono{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}
+.serif{font-family:var(--f-serif);font-style:italic;font-weight:300;letter-spacing:-.01em}
+.mute{color:var(--mute)}
+h1,h2,h3{margin:0;font-weight:500;text-wrap:balance}
+p{margin:0}
+
+/* ---------- Revelado por líneas ---------- */
+.line{display:block;overflow:hidden;padding-bottom:.06em;margin-bottom:-.06em}
+.line>span{display:inline-block;will-change:transform}
+.js .reveal .line>span{transform:translateY(105%);transition:transform 1.1s var(--ease-out)}
+.js .reveal.is-in .line>span{transform:none}
+.js .reveal .line:nth-child(2)>span{transition-delay:.08s}
+.js .reveal .line:nth-child(3)>span{transition-delay:.16s}
+.js .reveal .line:nth-child(4)>span{transition-delay:.24s}
+.js .fade{opacity:0;transform:translateY(24px);transition:opacity 1s var(--ease-out),transform 1s var(--ease-out)}
+.js .fade.is-in{opacity:1;transform:none}
+
+/* ---------- Preloader ---------- */
+.loader{position:fixed;inset:0;z-index:100;background:var(--bone);color:var(--ink);display:none;flex-direction:column;justify-content:space-between;padding-block:max(24px,env(safe-area-inset-top,0px)) max(24px,env(safe-area-inset-bottom,0px));transition:transform 1s var(--ease)}
+.js .loader{display:flex}
+.loader.out{transform:translateY(-100%)}
+.loader__top{display:flex;justify-content:space-between}
+.loader__count{font-size:clamp(5rem,22vw,20rem);font-weight:700;line-height:.8;letter-spacing:-.06em;font-variation-settings:"wdth" 75;font-variant-numeric:tabular-nums;align-self:flex-end}
+
+/* ---------- Navegación ---------- */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:calc(env(safe-area-inset-top,0px) + 20px);padding-bottom:20px;display:flex;align-items:center;justify-content:space-between;gap:24px;transition:transform .6s var(--ease),background .4s;mix-blend-mode:difference;color:#F6F5F0}
+.nav.hide{transform:translateY(-110%)}
+.logo{font-weight:800;font-size:1.35rem;letter-spacing:-.04em;font-variation-settings:"wdth" 125}
+.logo sup{font-size:.5em;font-weight:500;margin-left:2px}
+.nav__links{display:flex;gap:clamp(16px,2.4vw,36px);font-size:.9rem}
+.roll{display:inline-block;overflow:hidden;vertical-align:top;line-height:1.3}
+.roll>span{display:block;position:relative;transition:transform .55s var(--ease)}
+.roll>span::after{content:attr(data-t);position:absolute;left:0;top:100%}
+a:hover .roll>span,button:hover .roll>span,.roll:hover>span{transform:translateY(-100%)}
+.nav__cta{border:1px solid currentColor;border-radius:999px;padding:8px 18px;font-size:.9rem}
+.burger{display:none;font-size:.9rem}
+@media (max-width:860px){.nav__links,.nav__cta{display:none}.burger{display:block}}
+
+.menu{position:fixed;inset:0;z-index:49;background:var(--ink-2);display:flex;flex-direction:column;justify-content:flex-end;gap:40px;padding-block:120px max(32px,env(safe-area-inset-bottom,0px));clip-path:inset(0 0 100% 0);transition:clip-path .9s var(--ease);visibility:hidden}
+.menu.open{clip-path:inset(0);visibility:visible}
+.menu a.big{display:block;font-size:clamp(2.6rem,12vw,5rem);font-weight:500;letter-spacing:-.04em;line-height:1.05}
+.menu .line>span{transform:translateY(105%);transition:transform .9s var(--ease-out)}
+.menu.open .line>span{transform:none}
+.menu.open li:nth-child(2) .line>span{transition-delay:.06s}
+.menu.open li:nth-child(3) .line>span{transition-delay:.12s}
+.menu.open li:nth-child(4) .line>span{transition-delay:.18s}
+.menu.open li:nth-child(5) .line>span{transition-delay:.24s}
+.menu ul{list-style:none;margin:0;padding:0}
+
+/* ---------- Cursor ---------- */
+.cursor{position:fixed;top:0;left:0;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:#ECE7DF;mix-blend-mode:difference;pointer-events:none;z-index:90;display:none;align-items:center;justify-content:center;transition:width .4s var(--ease),height .4s var(--ease),margin .4s var(--ease)}
+.cursor span{font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#0A0A0A;opacity:0;transition:opacity .3s}
+.cursor.big{width:84px;height:84px;margin:-42px 0 0 -42px}
+.cursor.big span{opacity:1}
+@media (hover:hover) and (pointer:fine){.cursor{display:flex}}
+
+/* ---------- Hero ---------- */
+.hero{padding-top:clamp(130px,18vh,190px);padding-bottom:clamp(48px,8vh,96px);display:grid;gap:clamp(40px,7vh,80px)}
+.hero__meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px 32px}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:10px;vertical-align:1px;animation:pulse 2.4s infinite}
+@keyframes pulse{50%{opacity:.25}}
+.hero h1{font-size:clamp(2.5rem,9.2vw,10rem);line-height:.94;letter-spacing:-.045em;font-weight:500}
+.hero h1 .serif{font-weight:300;letter-spacing:-.03em}
+.hero h1 .indent{padding-left:clamp(0px,12vw,13rem)}
+/* el titular cae desde arriba */
+.js .hero h1 .line>span{transform:translateY(-105%);transition:transform 1.3s var(--ease-out)}
+.js .hero h1 .line:nth-child(2)>span{transition-delay:.1s}
+.js .hero h1 .line:nth-child(3)>span{transition-delay:.2s}
+.js.loaded .hero h1 .line>span{transform:none}
+.hero__foot{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:end;border-top:1px solid var(--line);padding-top:28px}
+.hero__foot p{grid-column:1 / span 5;font-size:clamp(1.05rem,1.5vw,1.3rem);line-height:1.5;max-width:46ch;min-width:0}
+.paths{grid-column:7 / -1;display:grid;min-width:0}
+.paths>.mono{padding-bottom:14px}
+.path{position:relative;isolation:isolate;display:flex;justify-content:space-between;align-items:center;gap:16px;border-top:1px solid var(--line);padding:18px 0;font-size:clamp(1.25rem,2.1vw,1.9rem);letter-spacing:-.03em;overflow:hidden;transition:color .5s var(--ease),padding .5s var(--ease)}
+.path:last-child{border-bottom:1px solid var(--line)}
+.path::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--accent);transform:scaleY(0);transform-origin:bottom;transition:transform .6s var(--ease)}
+.path small{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);white-space:nowrap;transition:color .5s}
+.path:hover{color:var(--accent-ink);padding-inline:16px}
+.path:hover::before{transform:scaleY(1);transform-origin:top}
+.path:hover small{color:var(--accent-ink)}
+.scroll i{display:block;width:1px;height:48px;background:var(--line);position:relative;overflow:hidden}
+.scroll i::after{content:"";position:absolute;inset:0;background:var(--bone);animation:drip 2s var(--ease) infinite}
+@keyframes drip{0%{transform:translateY(-100%)}60%,100%{transform:translateY(100%)}}
+@media (max-width:760px){.hero__foot p,.paths{grid-column:1 / -1}}
+
+/* ---------- Marquesina ---------- */
+.marquee{border-block:1px solid var(--line);padding-block:clamp(18px,3vw,34px);overflow:hidden;display:grid;gap:6px}
+.marquee__row{display:flex;white-space:nowrap;will-change:transform}
+.marquee__row span{font-size:clamp(2.2rem,6.5vw,6.5rem);font-weight:600;letter-spacing:-.04em;line-height:1.05;padding-right:.5em;font-variation-settings:"wdth" 112}
+.marquee__row span em{font-family:var(--f-serif);font-weight:300;color:var(--accent);padding-right:.5em}
+.marquee__row.outline span{color:transparent;-webkit-text-stroke:1px var(--mute)}
+.marquee__row.outline span em{-webkit-text-stroke:0;color:var(--mute)}
+
+/* ---------- Secciones ---------- */
+section{position:relative}
+.sec{padding-block:clamp(90px,14vw,190px)}
+.sec__head{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;margin-bottom:clamp(48px,7vw,100px)}
+.sec__head .mono{grid-column:1 / span 3;padding-top:.7em}
+.sec__head h2{grid-column:4 / -1;font-size:clamp(2.2rem,5.6vw,5.4rem);line-height:.98;letter-spacing:-.04em}
+@media (max-width:760px){.sec__head .mono,.sec__head h2{grid-column:1 / -1}}
+
+/* Agencia / manifiesto */
+.manifesto{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.manifesto .mono{grid-column:1 / span 3;padding-top:.6em}
+.manifesto p.big{grid-column:4 / -1;font-size:clamp(1.6rem,3.6vw,3.4rem);line-height:1.12;letter-spacing:-.025em;font-weight:400;min-width:0}
+.js .manifesto .w{opacity:.16;transition:opacity .25s linear}
+.js .manifesto .w.on{opacity:1}
+.pillars{grid-column:4 / -1;display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:clamp(56px,8vw,110px);border-top:1px solid var(--line)}
+.pillar{padding:28px 28px 0 0;display:grid;gap:12px;align-content:start;min-width:0}
+.pillar+.pillar{padding-left:28px;border-left:1px solid var(--line)}
+.pillar h3{font-size:1.3rem;letter-spacing:-.02em}
+.pillar p{color:var(--mute);font-size:.98rem;max-width:34ch}
+@media (max-width:760px){.manifesto .mono,.manifesto p.big,.pillars{grid-column:1 / -1}.pillars{grid-template-columns:1fr}.pillar,.pillar+.pillar{padding:24px 0;border-left:0;border-bottom:1px solid var(--line)}}
+
+/* Servicios */
+.svc-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.svc{position:relative;border-bottom:1px solid var(--line);overflow:hidden}
+.svc::before{content:"";position:absolute;inset:0;background:var(--bone);transform:scaleY(0);transform-origin:bottom;transition:transform .7s var(--ease)}
+.svc__in{position:relative;display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:start;padding-block:clamp(26px,3.4vw,46px);transition:color .5s var(--ease)}
+.svc__tag{grid-column:1 / span 3;padding-top:.9em}
+.svc h3{grid-column:4 / span 5;font-size:clamp(1.9rem,4.4vw,4.2rem);line-height:1;letter-spacing:-.04em;transition:transform .7s var(--ease);min-width:0}
+.svc__body{grid-column:9 / -1;display:grid;gap:14px;padding-top:.5em;min-width:0}
+.svc__body p{color:var(--mute);transition:color .5s;max-width:40ch}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);border-radius:999px;padding:4px 10px;transition:border-color .5s}
+.arrow{position:absolute;right:0;top:clamp(26px,3.4vw,46px);font-size:1.6rem;transition:transform .7s var(--ease)}
+@media (hover:hover){
+  .svc:hover::before{transform:scaleY(1);transform-origin:top}
+  .svc:hover .svc__in{color:var(--ink)}
+  .svc:hover .svc__body p{color:#3B3935}
+  .svc:hover .chips span{border-color:#B9B3A8}
+  .svc:hover h3{transform:translateX(clamp(8px,1.5vw,24px))}
+  .svc:hover .arrow{transform:rotate(-45deg)}
+}
+@media (max-width:860px){.svc__tag{grid-column:1 / -1;padding-top:0}.svc h3,.svc__body{grid-column:1 / -1}.arrow{display:none}}
+
+/* Método */
+.method{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.method__side{grid-column:1 / span 5;position:sticky;top:calc(env(safe-area-inset-top,0px) + 110px);align-self:start;display:grid;gap:28px}
+.method__side h2{font-size:clamp(2.2rem,5.6vw,5.4rem);line-height:.98;letter-spacing:-.04em;color:#3DDC84}
+.method__side p{color:var(--mute);max-width:38ch}
+.steps{grid-column:7 / -1;list-style:none;margin:0;padding:0;counter-reset:s}
+.step{border-top:1px solid var(--line);padding-block:34px 44px;display:grid;grid-template-columns:auto 1fr;gap:8px 28px}
+.step__n{font-family:var(--f-serif);font-style:italic;font-size:clamp(2.8rem,5vw,4.4rem);line-height:.9;color:var(--accent);font-weight:300;grid-row:span 3}
+.step h3{font-size:1.6rem;letter-spacing:-.03em}
+.step .mono{color:var(--mute)}
+.step p{color:var(--mute);max-width:44ch}
+@media (max-width:860px){.method__side,.steps{grid-column:1 / -1}.method__side{position:static}}
+
+/* Sectores: scroll horizontal */
+.hscroll{border-top:1px solid var(--line)}
+.hscroll__pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:clamp(28px,5vh,56px)}
+.hscroll__top{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
+.hscroll__top h2{font-size:clamp(2.2rem,5.6vw,5.4rem);line-height:.98;letter-spacing:-.04em}
+.bar{width:min(260px,40vw);height:1px;background:var(--line);position:relative}
+.bar i{position:absolute;inset:0;background:var(--bone);transform-origin:left;transform:scaleX(0)}
+.track{display:flex;gap:clamp(16px,2vw,28px);will-change:transform;width:max-content}
+.card{width:clamp(280px,32vw,460px);aspect-ratio:4/5;max-width:100%;background:var(--ink-2);border:1px solid var(--line);padding:clamp(22px,2.4vw,34px);display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;transition:border-color .5s}
+.card::after{content:"";position:absolute;inset:auto -20% -60% -20%;height:80%;background:radial-gradient(closest-side,rgba(167,139,250,.24),transparent);opacity:0;transition:opacity .6s}
+.card:hover{border-color:#4A463F}
+.card:hover::after{opacity:1}
+.card h3{font-size:clamp(1.8rem,2.8vw,2.7rem);line-height:1;letter-spacing:-.035em}
+.card p{color:var(--mute);max-width:32ch}
+.kpi{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:16px;position:relative;z-index:1}
+.kpi b{font-weight:500;color:var(--bone)}
+@media (max-width:860px){
+  .hscroll__pin{position:static;height:auto;padding-block:clamp(90px,14vw,190px)}
+  .track{flex-direction:column;width:auto;transform:none!important}
+  .card{width:100%;aspect-ratio:auto;gap:48px}
+  .hs-ctl{display:none}
+}
+.hs-ctl{display:grid;gap:12px;justify-items:end}
+.card--cta{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.card--cta p,.card--cta .mono,.card--cta .kpi b{color:var(--accent-ink)}
+.card--cta .kpi{border-color:rgba(10,10,10,.25)}
+.card--cta:hover{border-color:var(--bone)}
+
+/* Compromisos */
+.commit{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+.commit div{padding:32px 28px 8px 0;display:grid;gap:14px;align-content:start;min-width:0}
+.commit div+div{padding-left:28px;border-left:1px solid var(--line)}
+.commit strong{font-family:var(--f-serif);font-style:italic;font-weight:300;font-size:clamp(2.4rem,4vw,3.6rem);line-height:1;letter-spacing:-.02em;color:var(--bone)}
+.commit h3{font-size:1.15rem;letter-spacing:-.02em}
+.commit p{color:var(--mute);font-size:.95rem}
+@media (max-width:960px){.commit{grid-template-columns:1fr 1fr}.commit div:nth-child(3){padding-left:0;border-left:0}.commit div:nth-child(n+3){border-top:1px solid var(--line);margin-top:24px}}
+@media (max-width:560px){.commit{grid-template-columns:1fr}.commit div,.commit div+div{padding:28px 0;border-left:0;border-top:1px solid var(--line);margin:0}.commit div:first-child{border-top:0}}
+
+/* FAQ */
+.faq{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.faq__list{grid-column:4 / -1;border-top:1px solid var(--line)}
+.qa{border-bottom:1px solid var(--line)}
+.qa button{width:100%;display:flex;justify-content:space-between;align-items:center;gap:24px;text-align:left;padding-block:26px;font-size:clamp(1.15rem,1.9vw,1.6rem);letter-spacing:-.02em}
+.qa .plus{position:relative;width:16px;height:16px;flex:none}
+.qa .plus::before,.qa .plus::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:currentColor;transition:transform .5s var(--ease)}
+.qa .plus::after{transform:rotate(90deg)}
+.qa.open .plus::after{transform:rotate(0)}
+.qa__a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .6s var(--ease)}
+.qa.open .qa__a{grid-template-rows:1fr}
+.qa__a>div{overflow:hidden}
+.qa__a p{color:var(--mute);max-width:60ch;padding-bottom:28px}
+@media (max-width:760px){.faq__list{grid-column:1 / -1}}
+
+/* Contacto */
+.contact{border-top:1px solid var(--line)}
+.contact h2{font-size:clamp(3.4rem,15vw,15rem);line-height:.86;letter-spacing:-.06em;font-weight:500}
+.contact h2 .serif{font-weight:300}
+.contact__grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;margin-top:clamp(48px,7vw,100px)}
+.contact__info{grid-column:1 / span 4;display:grid;gap:28px;align-content:start;min-width:0}
+.mail{font-size:clamp(1.3rem,2.2vw,1.9rem);letter-spacing:-.02em;user-select:all;word-break:break-all}
+.copy{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);border-radius:999px;padding:6px 14px;justify-self:start;transition:background .3s,color .3s}
+.copy:hover{background:var(--bone);color:var(--ink)}
+form{grid-column:6 / -1;display:grid;grid-template-columns:1fr 1fr;gap:34px 28px;min-width:0}
+.field{display:grid;gap:8px;min-width:0}
+.field.full{grid-column:1 / -1}
+label,.legend{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+input,select,textarea{font:inherit;color:var(--bone);background:transparent;border:0;border-bottom:1px solid var(--line);padding:10px 0;border-radius:0;outline:none;transition:border-color .4s;width:100%}
+select option{background:var(--ink-2)}
+textarea{resize:vertical;min-height:110px}
+input:focus,select:focus,textarea:focus{border-color:var(--bone)}
+.pick{display:flex;flex-wrap:wrap;gap:8px}
+.pick input{position:absolute;opacity:0;width:1px;height:1px}
+.pick label{font-size:.72rem;color:var(--bone);border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer;transition:background .3s,color .3s,border-color .3s}
+.pick input:checked+label{background:var(--bone);color:var(--ink);border-color:var(--bone)}
+.pick input:focus-visible+label{outline:1px solid var(--accent);outline-offset:3px}
+.send{grid-column:1 / -1;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:14px;background:var(--bone);color:var(--ink);border-radius:999px;padding:16px 28px;font-weight:500;position:relative;overflow:hidden}
+.btn::before{content:"";position:absolute;inset:0;background:var(--accent);transform:translateY(101%);transition:transform .6s var(--ease)}
+.btn:hover::before{transform:none}
+.btn>*{position:relative}
+.note{color:var(--mute);font-size:.9rem;min-height:1.5em}
+@media (max-width:860px){.contact__info,form{grid-column:1 / -1}form{grid-template-columns:1fr}}
+
+/* Footer */
+footer{border-top:1px solid var(--line);padding-top:56px;overflow:hidden}
+.foot{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.foot>div{grid-column:span 3;display:grid;gap:8px;align-content:start;min-width:0}
+.foot>div:first-child{grid-column:span 6}
+.foot a{width:max-content;max-width:100%}
+@media (max-width:760px){.foot>div,.foot>div:first-child{grid-column:1 / -1}}
+.wordmark{display:flex;justify-content:space-between;font-weight:800;font-size:clamp(4.5rem,24.5vw,30rem);line-height:.78;letter-spacing:-.05em;font-variation-settings:"wdth" 125;margin-top:clamp(56px,8vw,120px);padding-bottom:max(12px,env(safe-area-inset-bottom,0px));overflow:hidden}
+.wordmark span{display:inline-block}
+.js .wordmark span{transform:translateY(100%);transition:transform 1.2s var(--ease-out)}
+.js .wordmark.is-in span{transform:none}
+.wordmark span:nth-child(2){transition-delay:.06s}.wordmark span:nth-child(3){transition-delay:.12s}.wordmark span:nth-child(4){transition-delay:.18s}.wordmark span:nth-child(5){transition-delay:.24s}.wordmark span:nth-child(6){transition-delay:.3s}
+
+/* Planes: selector de canales */
+.tv{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(24px,3vw,48px);align-items:start}
+.tv__tabs{display:grid;border-top:1px solid var(--line)}
+.tv__tabs button{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:18px;text-align:left;padding:22px 0;border-bottom:1px solid var(--line);font-size:clamp(1.3rem,2.2vw,2rem);letter-spacing:-.03em;color:var(--mute);transition:color .4s,padding .5s var(--ease)}
+.tv__tabs button::after{content:"→";color:var(--accent);opacity:0;transform:translateX(-10px);transition:opacity .4s,transform .5s var(--ease)}
+.tv__tabs button:hover{color:var(--bone)}
+.tv__tabs button[aria-selected="true"]{color:var(--bone);padding-left:14px}
+.tv__tabs button[aria-selected="true"]::after{opacity:1;transform:none}
+.tv__tabs .mono{color:var(--accent)}
+.tv__screen{position:relative;background:var(--ink-2);border:1px solid var(--line);border-radius:18px;padding:clamp(22px,3vw,44px);overflow:hidden;display:grid;gap:28px;align-content:start;min-height:460px}
+.tv__screen::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(236,231,223,.025) 0 1px,transparent 1px 3px)}
+.tv__noise{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;opacity:0;pointer-events:none;z-index:2;transition:opacity .12s}
+.tv__noise.on{opacity:.5}
+.tv__bar{display:flex;justify-content:space-between;gap:16px;color:var(--mute)}
+.tv__body{display:grid;gap:22px}
+.tv__body h3{font-size:clamp(2.2rem,4.6vw,4.4rem);line-height:.95;letter-spacing:-.04em}
+.tv__body .lead{font-size:clamp(1.25rem,2vw,1.7rem);line-height:1.25;color:var(--bone);max-width:36ch}
+.tv__cols{display:grid;grid-template-columns:1fr 1fr;gap:28px;border-top:1px solid var(--line);padding-top:24px}
+.tv__cols ul{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:9px}
+.tv__cols li::before{content:"↗ ";color:var(--accent)}
+.tv__cols p{color:var(--mute)}
+@media (max-width:860px){.tv{grid-template-columns:1fr}.tv__cols{grid-template-columns:1fr}.tv__screen{min-height:0}}
+#replay{justify-self:start;text-align:left;color:var(--mute);transition:color .3s}
+#replay:hover{color:var(--accent)}
+
+/* Identidad: Montserrat (títulos) + Inter (textos), negro profundo, blanco roto, lavanda */
+body{font-family:var(--f-body)}
+h1,h2,h3,.logo,.loader__count,.menu a.big,.marquee__row span,.wordmark,.path,.tv__tabs button,.qa button,.mail,.btn,.nav__cta{font-family:var(--f-display)}
+.serif,.hero h1 .serif,.contact h2 .serif{font-style:italic;font-weight:700;letter-spacing:-.02em;color:var(--accent)}
+.mono,.path small,.chips span,label,.legend,.cursor span,.copy{font-weight:600;letter-spacing:.14em}
+.marquee__row span em{font-style:normal;font-weight:500}
+.step__n,.commit strong{font-style:normal;font-weight:700;letter-spacing:-.03em}
+.logo{font-weight:600;letter-spacing:.2em}
+.loader__count{letter-spacing:-.04em}
+.hero h1{font-size:clamp(2.1rem,7vw,7.6rem);line-height:1.02;letter-spacing:-.03em;font-weight:700}
+.sec__head h2,.method__side h2,.hscroll__top h2{font-size:clamp(2rem,4.6vw,4.6rem);line-height:1.04;letter-spacing:-.03em;font-weight:700}
+.svc h3{font-size:clamp(1.6rem,3.4vw,3.2rem);font-weight:600;letter-spacing:-.03em}
+.card h3,.tv__body h3,.pillar h3,.step h3,.commit h3{font-weight:600;letter-spacing:-.02em}
+.marquee__row span{font-size:clamp(1.9rem,5.4vw,5.4rem);font-weight:700;letter-spacing:-.03em}
+.manifesto p.big{font-weight:500;letter-spacing:-.02em}
+.contact h2{font-size:clamp(2.6rem,10.5vw,10.5rem);font-weight:700;letter-spacing:-.04em;line-height:.95}
+.wordmark{font-size:clamp(3.6rem,20vw,24rem);letter-spacing:-.02em}
+.menu a.big{font-weight:600;letter-spacing:-.03em}
+/* Secciones claras sobre blanco roto */
+.light{--ink:#F6F5F0;--ink-2:#FFFFFF;--line:#E2DFD8;--mute:#6B6B6B;--bone:#0B0B0B;--accent:#8B6CF2;background:var(--ink);color:var(--bone)}
+
+/* ---------- Hero con kiosko y pizarras ---------- */
+:root{--chalk:#F3F1EA;--slate:#1B1F1C;--slate-2:#2A2F2B;--wood:#8A6B4E;--f-chalk:"Caveat","Comic Sans MS",cursive}
+.hero{padding-bottom:clamp(32px,5vh,64px);gap:clamp(24px,4vh,48px)}
+.hero__grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:center}
+.hero__copy{grid-column:1 / span 5;display:grid;gap:28px;min-width:0}
+.hero h1{font-size:clamp(2.1rem,4.3vw,5rem)}
+.hero__copy p{font-size:clamp(1.05rem,1.35vw,1.2rem);max-width:42ch;color:var(--mute)}
+.kiosk{grid-column:6 / -1;position:relative;container-type:inline-size;max-width:100%;margin-block:-3% -4%}
+.kiosk img{display:block;width:100%;height:auto;filter:invert(1);mix-blend-mode:screen}
+.js .kiosk img{opacity:0;transform:translateY(24px);transition:opacity 1.4s .2s,transform 1.4s .2s var(--ease-out)}
+.js.loaded .kiosk img{opacity:1;transform:none}
+@media (max-width:900px){.hero__copy,.kiosk{grid-column:1 / -1}.kiosk{margin-block:0}}
+
+.board{position:absolute;left:var(--x);top:var(--y);width:var(--w);aspect-ratio:4/3;z-index:2;transform:rotate(var(--r));transform-origin:50% -25%;transition:transform .6s cubic-bezier(.34,1.56,.64,1)}
+.board::before{content:"";position:absolute;left:22%;right:22%;bottom:100%;height:7cqw;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpolyline points='0,100 50,0 100,100' fill='none' stroke='%23F6F5F0' stroke-width='1.5' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") center/100% 100% no-repeat}
+.board::after{content:"";position:absolute;left:50%;bottom:calc(100% + 7cqw - 4px);width:8px;height:8px;margin-left:-4px;border-radius:50%;background:var(--accent)}
+.board__in{position:absolute;inset:0;display:grid;place-content:center;gap:.5em;text-align:center;padding:4%;background:radial-gradient(120% 90% at 30% 20%,var(--slate-2),var(--slate));border:max(3px,1cqw) solid var(--wood);border-radius:4px;box-shadow:0 1.6cqw 3cqw rgba(0,0,0,.55),inset 0 0 2.4cqw rgba(0,0,0,.6);transform-origin:50% -25%;animation:sway 5s ease-in-out infinite;animation-delay:calc(var(--d) * -6)}
+.chalk{font-family:var(--f-chalk);font-weight:700;font-size:max(14px,3.6cqw);line-height:1;color:var(--chalk);text-shadow:0 0 1px rgba(255,255,255,.45);text-wrap:balance}
+.board__more{font-family:var(--f-chalk);font-weight:600;font-size:max(12px,2.3cqw);line-height:1;color:var(--accent)}
+.board:hover,.board:focus-visible{transform:rotate(0deg) translateY(-2%) scale(1.07);z-index:3}
+.js .board{opacity:0;transform:translateY(-40%) rotate(calc(var(--r) * 4));transition:transform 1.1s cubic-bezier(.34,1.56,.64,1),opacity .5s;transition-delay:calc(var(--d) + .9s)}
+.js.loaded .board{opacity:1;transform:rotate(var(--r))}
+.js.loaded .kiosk.settled .board{transition-delay:0s;transition-duration:.6s}
+.js.loaded .kiosk.settled .board:hover,.js.loaded .kiosk.settled .board:focus-visible{transform:rotate(0deg) translateY(-2%) scale(1.07)}
+@keyframes sway{0%,100%{transform:rotate(-1.4deg)}50%{transform:rotate(1.4deg)}}
+
+/* Pizarra ampliada */
+.sheet{position:fixed;inset:0;z-index:80;display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.sheet__bg{position:absolute;inset:0;background:rgba(11,11,11,.74);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;transition:opacity .5s}
+.sheet.open .sheet__bg{opacity:1}
+.sheet__board{position:relative;width:min(780px,100%);max-height:calc(100svh - 32px);overflow:auto;transform-origin:0 0;background:radial-gradient(120% 90% at 25% 15%,var(--slate-2),var(--slate));border:clamp(8px,1.4vw,14px) solid var(--wood);border-radius:6px;box-shadow:0 30px 80px rgba(0,0,0,.6),inset 0 0 40px rgba(0,0,0,.55);padding:clamp(24px,4vw,52px);display:grid;gap:18px;color:var(--chalk)}
+.sheet__board .mono{color:var(--accent)}
+.sheet__board h3.chalk{font-size:clamp(2.8rem,7vw,5rem);font-weight:700;letter-spacing:0}
+.sheet__board>p{color:#C9C7BF;max-width:46ch;font-size:1.05rem}
+.sheet__list{list-style:none;margin:6px 0 0;padding:22px 0 0;border-top:1px dashed rgba(243,241,234,.28);display:grid;grid-template-columns:1fr 1fr;gap:18px 32px}
+.sheet__list li{display:grid;gap:4px;min-width:0}
+.sheet__list b{font-family:var(--f-chalk);font-size:1.7rem;font-weight:700;line-height:1}
+.sheet__list b::before{content:"✓ ";color:var(--accent)}
+.sheet__list span{color:#B9B7AF;font-size:.92rem;max-width:34ch}
+.sheet.open .sheet__list li{animation:chalkIn .5s both;animation-delay:calc(var(--i) * 70ms + .3s)}
+@keyframes chalkIn{from{opacity:0;transform:translateY(10px)}}
+.sheet__x{position:absolute;top:14px;right:14px;width:42px;height:42px;border-radius:50%;border:1px solid rgba(243,241,234,.3);color:var(--chalk);font-size:1rem;transition:background .3s,color .3s}
+.sheet__x:hover{background:var(--chalk);color:var(--slate)}
+.sheet__board .btn{justify-self:start;margin-top:8px}
+@media (max-width:600px){.sheet__list{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.board__in{animation:none}.js .board{opacity:1;transform:rotate(var(--r))}.js .kiosk img{opacity:1;transform:none}}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:.01ms!important;animation:none!important}
+  .js .reveal .line>span,.js .hero h1 .line>span,.js .wordmark span{transform:none}
+  .js .fade{opacity:1;transform:none}
+  .js .manifesto .w{opacity:1}
+  .loader{display:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__top wrap"><span class="mono">EL KIOSKO®</span><span class="mono">Agencia de marketing</span></div>
+  <div class="loader__count wrap" id="count">000</div>
+</div>
+
+<div class="cursor" id="cursor" aria-hidden="true"><span id="cursorLabel"></span></div>
+
+<div class="sheet" id="sheet" hidden>
+  <div class="sheet__bg" data-close></div>
+  <div class="sheet__board" id="sheetBoard" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <button class="sheet__x" type="button" data-close aria-label="Cerrar pizarra">✕</button>
+    <span class="mono" id="sheetKick">Pizarra</span>
+    <h3 class="chalk" id="sheetTitle"></h3>
+    <p id="sheetLead"></p>
+    <ul class="sheet__list" id="sheetList"></ul>
+    <a href="#contacto" class="btn" id="sheetCta"><span>Pedir presupuesto</span><span>→</span></a>
+  </div>
+</div>
+
+<header class="nav wrap" id="nav">
+  <a href="#inicio" class="logo">EL KIOSKO<sup>®</sup></a>
+  <nav class="nav__links" aria-label="Principal">
+    <a href="#agencia"><span class="roll"><span data-t="Agencia">Agencia</span></span></a>
+    <a href="#servicios"><span class="roll"><span data-t="Servicios">Servicios</span></span></a>
+    <a href="#metodo"><span class="roll"><span data-t="Método">Método</span></span></a>
+    <a href="#sectores"><span class="roll"><span data-t="Sectores">Sectores</span></span></a>
+    <a href="#planes"><span class="roll"><span data-t="Planes">Planes</span></span></a>
+  </nav>
+  <a href="#contacto" class="nav__cta"><span class="roll"><span data-t="Hablemos →">Hablemos →</span></span></a>
+  <button class="burger" id="burger" aria-expanded="false" aria-controls="menu"><span class="roll"><span data-t="Menú" id="burgerTxt">Menú</span></span></button>
+</header>
+
+<div class="menu wrap" id="menu" aria-hidden="true">
+  <ul>
+    <li><a class="big" href="#agencia"><span class="line"><span>Agencia</span></span></a></li>
+    <li><a class="big" href="#servicios"><span class="line"><span>Servicios</span></span></a></li>
+    <li><a class="big" href="#metodo"><span class="line"><span>Método</span></span></a></li>
+    <li><a class="big" href="#sectores"><span class="line"><span>Sectores</span></span></a></li>
+    <li><a class="big" href="#planes"><span class="line"><span>Planes</span></span></a></li>
+    <li><a class="big" href="#contacto"><span class="line"><span>Contacto</span></span></a></li>
+  </ul>
+  <p class="mono mute">hola@elkiosko.agency</p>
+</div>
+
+<main>
+  <!-- INICIO -->
+  <section class="hero wrap" id="inicio">
+    <div class="hero__meta mono">
+      <span><i class="dot"></i>Abierto · Aceptando proyectos 2027</span>
+      <span class="mute">Web · Branding · Redes sociales</span>
+    </div>
+    <div class="hero__grid">
+      <div class="hero__copy">
+        <h1>
+          <span class="line"><span>Todo lo que</span></span>
+          <span class="line"><span>tu marca necesita,</span></span>
+          <span class="line"><span class="serif">en un solo kiosko.</span></span>
+        </h1>
+        <p>Somos una agencia de marketing. Hacemos páginas web, branding y redes sociales para marcas que quieren que se las vea y se las elija.</p>
+        <span class="mono mute">Toca una pizarra para ver qué hay dentro ↘</span>
+      </div>
+      <div class="kiosk" id="kiosk">
+        <img src="kiosko.jpg" alt="Ilustración de un kiosko con toldo de rayas y el rótulo El Kiosko" width="1400" height="1400">
+        <button class="board" type="button" data-svc="web" data-cursor="Abrir" aria-haspopup="dialog" style="--x:6%;--y:50%;--w:26%;--r:-4deg;--d:0s"><span class="board__in"><span class="chalk">Página web</span><span class="board__more">ver dentro +</span></span></button>
+        <button class="board" type="button" data-svc="branding" data-cursor="Abrir" aria-haspopup="dialog" style="--x:36%;--y:62%;--w:28%;--r:2deg;--d:.15s"><span class="board__in"><span class="chalk">Branding</span><span class="board__more">ver dentro +</span></span></button>
+        <button class="board" type="button" data-svc="redes" data-cursor="Abrir" aria-haspopup="dialog" style="--x:68%;--y:50%;--w:26%;--r:4deg;--d:.3s"><span class="board__in"><span class="chalk">Redes sociales</span><span class="board__more">ver dentro +</span></span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUESINA -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__row" data-dir="-1">
+      <span>Estrategia <em>↗</em>Branding <em>↗</em>Performance <em>↗</em>Contenido <em>↗</em>Web <em>↗</em>SEO <em>↗</em></span>
+      <span>Estrategia <em>↗</em>Branding <em>↗</em>Performance <em>↗</em>Contenido <em>↗</em>Web <em>↗</em>SEO <em>↗</em></span>
+    </div>
+    <div class="marquee__row outline" data-dir="1">
+      <span>Pensamos <em>·</em>Hacemos <em>·</em>Medimos <em>·</em>Repetimos <em>·</em></span>
+      <span>Pensamos <em>·</em>Hacemos <em>·</em>Medimos <em>·</em>Repetimos <em>·</em></span>
+    </div>
+  </div>
+
+  <!-- AGENCIA -->
+  <section class="sec wrap" id="agencia">
+    <div class="manifesto">
+      <span class="mono mute">[ Agencia ]</span>
+      <p class="big" id="manifesto">Creemos que el buen marketing se parece al kiosko de tu barrio. Está donde lo necesitas, sabes lo que vas a encontrar y te atienden por tu nombre. Trabajamos con pocas marcas a la vez para poder pensar cada decisión, medir cada euro y dar la cara por cada resultado.</p>
+      <div class="pillars">
+        <div class="pillar fade"><span class="mono" style="color:var(--accent)">Criterio</span><h3>Estrategia antes que ejecución</h3><p>Ninguna campaña sale sin objetivo, público y métrica de éxito definidos por escrito.</p></div>
+        <div class="pillar fade"><span class="mono" style="color:var(--accent)">Rigor</span><h3>Datos que se entienden</h3><p>Informes claros, con lo que ha funcionado, lo que no y qué haremos el mes siguiente.</p></div>
+        <div class="pillar fade"><span class="mono" style="color:var(--accent)">Cercanía</span><h3>Un equipo, sin intermediarios</h3><p>Hablas directamente con quien diseña, escribe y lanza tu campaña.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section class="sec wrap light" id="servicios">
+    <div class="sec__head">
+      <span class="mono mute">[ Servicios ]</span>
+      <h2 class="reveal"><span class="line"><span>Todo lo que una marca</span></span><span class="line"><span>necesita para <span class="serif">crecer.</span></span></span></h2>
+    </div>
+    <ul class="svc-list">
+      <li class="svc" data-cursor="Ver"><div class="svc__in">
+        <span class="svc__tag mono mute">Pensar</span>
+        <h3>Estrategia de marketing</h3>
+        <div class="svc__body"><p>Auditoría, posicionamiento y un plan a 90 días con objetivos, presupuesto y canales priorizados.</p><div class="chips"><span>Auditoría</span><span>Buyer persona</span><span>Plan de medios</span><span>KPIs</span></div></div>
+        <span class="arrow" aria-hidden="true">↗</span></div></li>
+      <li class="svc" data-cursor="Ver"><div class="svc__in">
+        <span class="svc__tag mono mute">Ser</span>
+        <h3>Branding e identidad</h3>
+        <div class="svc__body"><p>Naming, identidad visual, tono de voz y manual de marca para que todo lo que publiques suene a ti.</p><div class="chips"><span>Naming</span><span>Logotipo</span><span>Manual de marca</span><span>Tono de voz</span></div></div>
+        <span class="arrow" aria-hidden="true">↗</span></div></li>
+      <li class="svc" data-cursor="Ver"><div class="svc__in">
+        <span class="svc__tag mono mute">Vender</span>
+        <h3>Performance y paid media</h3>
+        <div class="svc__body"><p>Campañas de pago orientadas a conversión, con test creativos semanales y optimización por ROAS y CAC.</p><div class="chips"><span>Meta Ads</span><span>Google Ads</span><span>TikTok Ads</span><span>CRO</span></div></div>
+        <span class="arrow" aria-hidden="true">↗</span></div></li>
+      <li class="svc" data-cursor="Ver"><div class="svc__in">
+        <span class="svc__tag mono mute">Contar</span>
+        <h3>Social media y contenido</h3>
+        <div class="svc__body"><p>Calendario editorial, producción de foto y vídeo, y gestión de comunidad con criterio de marca.</p><div class="chips"><span>Instagram</span><span>TikTok</span><span>LinkedIn</span><span>Producción</span></div></div>
+        <span class="arrow" aria-hidden="true">↗</span></div></li>
+      <li class="svc" data-cursor="Ver"><div class="svc__in">
+        <span class="svc__tag mono mute">Convertir</span>
+        <h3>Web y e‑commerce</h3>
+        <div class="svc__body"><p>Webs rápidas, claras y pensadas para convertir. Diseño UX/UI, desarrollo y analítica desde el primer día.</p><div class="chips"><span>UX/UI</span><span>Shopify</span><span>WordPress</span><span>GA4</span></div></div>
+        <span class="arrow" aria-hidden="true">↗</span></div></li>
+      <li class="svc" data-cursor="Ver"><div class="svc__in">
+        <span class="svc__tag mono mute">Aparecer</span>
+        <h3>SEO y posicionamiento</h3>
+        <div class="svc__body"><p>SEO técnico, contenidos y SEO local para captar demanda que ya existe y no depender solo de anuncios.</p><div class="chips"><span>SEO técnico</span><span>Contenidos</span><span>Google Business</span><span>Linkbuilding</span></div></div>
+        <span class="arrow" aria-hidden="true">↗</span></div></li>
+    </ul>
+  </section>
+
+  <!-- MÉTODO -->
+  <section class="sec wrap" id="metodo" style="border-top:1px solid var(--line)">
+    <div class="method">
+      <div class="method__side">
+        <span class="mono mute">[ Método ]</span>
+        <h2 class="reveal"><span class="line"><span>Cuatro fases.</span></span><span class="line"><span class="serif">Cero improvisación.</span></span></h2>
+        <p class="fade">Cada proyecto sigue el mismo proceso. Así sabes en todo momento qué estamos haciendo, por qué y cuándo verás resultados.</p>
+      </div>
+      <ol class="steps">
+        <li class="step fade"><span class="step__n">01</span><span class="mono">Semanas 1–2</span><h3>Diagnóstico</h3><p>Auditamos tu marca, tus canales y tu competencia. Definimos con datos de dónde partimos y cuáles son los KPIs que importan.</p></li>
+        <li class="step fade"><span class="step__n">02</span><span class="mono">Semanas 3–4</span><h3>Estrategia</h3><p>Plan a 90 días: mensajes, públicos, canales, calendario y reparto de presupuesto. Lo validas antes de lanzar nada.</p></li>
+        <li class="step fade"><span class="step__n">03</span><span class="mono">Mes 2 en adelante</span><h3>Ejecución</h3><p>Producimos y lanzamos en sprints quincenales. Testeamos creatividades y audiencias para escalar lo que funciona.</p></li>
+        <li class="step fade"><span class="step__n">04</span><span class="mono">Cada mes</span><h3>Medición</h3><p>Informe mensual con ROAS, coste por lead y ventas atribuidas, y una reunión para decidir los siguientes pasos.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- SECTORES (scroll horizontal) -->
+  <section class="hscroll" id="sectores">
+    <div class="hscroll__pin">
+      <div class="hscroll__top wrap">
+        <div style="display:grid;gap:20px">
+          <span class="mono mute">[ Sectores ]</span>
+          <h2 class="reveal"><span class="line"><span>Hablamos el idioma</span></span><span class="line"><span>de tu <span class="serif">sector.</span></span></span></h2>
+        </div>
+        <div class="hs-ctl"><span class="mono mute">Sigue bajando →</span><div class="bar" aria-hidden="true"><i id="bar"></i></div></div>
+      </div>
+      <div class="wrap"><div class="track" id="track">
+        <article class="card" data-cursor="Sector"><span class="mono mute">Hostelería</span><div style="display:grid;gap:16px"><h3>Restaurantes y hoteles</h3><p>Llenar mesas entre semana y vender habitaciones sin depender de las plataformas.</p></div><div class="kpi mono"><span class="mute">KPI</span><b>Reservas directas</b></div></article>
+        <article class="card" data-cursor="Sector"><span class="mono mute">Moda</span><div style="display:grid;gap:16px"><h3>Moda y lifestyle</h3><p>Marcas con estética propia que necesitan vender online sin perder el tono.</p></div><div class="kpi mono"><span class="mute">KPI</span><b>ROAS</b></div></article>
+        <article class="card" data-cursor="Sector"><span class="mono mute">Inmobiliario</span><div style="display:grid;gap:16px"><h3>Inmobiliarias y promotoras</h3><p>Captación de compradores y propietarios con campañas segmentadas por zona.</p></div><div class="kpi mono"><span class="mute">KPI</span><b>Leads cualificados</b></div></article>
+        <article class="card" data-cursor="Sector"><span class="mono mute">Salud</span><div style="display:grid;gap:16px"><h3>Clínicas y estética</h3><p>Comunicación que transmite confianza y llena la agenda, cumpliendo la normativa sanitaria.</p></div><div class="kpi mono"><span class="mute">KPI</span><b>Citas agendadas</b></div></article>
+        <article class="card" data-cursor="Sector"><span class="mono mute">Tecnología</span><div style="display:grid;gap:16px"><h3>Startups y SaaS</h3><p>Posicionamiento claro y adquisición escalable para productos que necesitan explicarse.</p></div><div class="kpi mono"><span class="mute">KPI</span><b>CAC / MRR</b></div></article>
+        <article class="card" data-cursor="Sector"><span class="mono mute">Educación</span><div style="display:grid;gap:16px"><h3>Escuelas y formación</h3><p>Campañas de matrícula con fechas clave, embudos de captación y seguimiento.</p></div><div class="kpi mono"><span class="mute">KPI</span><b>Matrículas</b></div></article>
+        <a class="card card--cta" href="#contacto" data-cursor="Hablemos"><span class="mono">[ Próximo caso ]</span><div style="display:grid;gap:16px"><h3>Tu marca, aquí.</h3><p>¿Tu sector no aparece? Cuéntanos qué vendes y te decimos cómo lo haríamos.</p></div><div class="kpi mono"><span>Contacto</span><b>Hablemos →</b></div></a>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- PLANES (selector de canales) -->
+  <section class="sec wrap" id="planes" style="border-top:1px solid var(--line)">
+    <div class="sec__head">
+      <span class="mono mute">[ Planes ]</span>
+      <h2 class="reveal"><span class="line"><span>Elige el canal</span></span><span class="line"><span>que mejor te <span class="serif">encaja.</span></span></span></h2>
+    </div>
+    <div class="tv">
+      <div class="tv__tabs" role="tablist" aria-label="Planes">
+        <button role="tab" aria-selected="true" aria-controls="chPanel"><span class="mono">CH 01</span><span>Arranque</span></button>
+        <button role="tab" aria-selected="false" aria-controls="chPanel"><span class="mono">CH 02</span><span>Crecimiento</span></button>
+        <button role="tab" aria-selected="false" aria-controls="chPanel"><span class="mono">CH 03</span><span>Escala</span></button>
+      </div>
+      <div class="tv__screen" id="chPanel" role="tabpanel" aria-live="polite">
+        <canvas class="tv__noise" id="noise" aria-hidden="true"></canvas>
+        <div class="tv__bar mono"><span><i class="dot"></i>En emisión</span><span id="chNum">CH 01 / 03</span></div>
+        <div class="tv__body" id="chBody">
+          <h3>Arranque</h3>
+          <p class="lead serif">Para poner orden y salir con buen pie.</p>
+          <div class="tv__cols">
+            <div><span class="legend">Incluye</span><ul><li>Auditoría y plan a 90 días</li><li>Revisión o creación de identidad básica</li><li>Gestión de 2 redes sociales</li><li>1 campaña de pago activa</li><li>Informe mensual</li></ul></div>
+            <div style="display:grid;gap:18px;align-content:start"><div style="display:grid;gap:6px"><span class="legend">Ideal para</span><p>Marcas nuevas o que nunca han hecho marketing con método.</p></div><div style="display:grid;gap:6px"><span class="legend">Compromiso mínimo</span><p>3 meses</p></div><a href="#contacto" class="btn" style="justify-self:start"><span>Pedir propuesta</span><span>→</span></a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPROMISOS -->
+  <section class="sec wrap light">
+    <div class="sec__head">
+      <span class="mono mute">[ Compromisos ]</span>
+      <h2 class="reveal"><span class="line"><span>Lo que puedes esperar</span></span><span class="line"><span>de nosotros, <span class="serif">por escrito.</span></span></span></h2>
+    </div>
+    <div class="commit">
+      <div class="fade"><strong>24 h</strong><h3>Respuesta garantizada</h3><p>Contestamos cualquier consulta en menos de un día laborable.</p></div>
+      <div class="fade"><strong>3 meses</strong><h3>Sin permanencias largas</h3><p>Contratos trimestrales. Te quedas porque funciona, no por una cláusula.</p></div>
+      <div class="fade"><strong>100 %</strong><h3>Tus cuentas son tuyas</h3><p>Píxeles, campañas y analítica siempre a tu nombre y con acceso total.</p></div>
+      <div class="fade"><strong>1 informe</strong><h3>Al mes, sin humo</h3><p>Resultados, aprendizajes y próximos pasos en una sola página.</p></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="sec wrap" id="faq">
+    <div class="faq">
+      <div style="grid-column:1 / -1" class="sec__head">
+        <span class="mono mute">[ Preguntas ]</span>
+        <h2 class="reveal"><span class="line"><span>Antes de empezar.</span></span></h2>
+      </div>
+      <div class="faq__list">
+        <div class="qa"><button aria-expanded="false">¿Trabajáis con pequeñas empresas?<span class="plus"></span></button><div class="qa__a"><div><p>Sí. Adaptamos el alcance al momento de cada marca. Preferimos empezar con un servicio bien hecho que con cinco a medias.</p></div></div></div>
+        <div class="qa"><button aria-expanded="false">¿Cuándo se ven los primeros resultados?<span class="plus"></span></button><div class="qa__a"><div><p>En publicidad de pago, las primeras señales llegan en 2 a 4 semanas. En SEO y marca, el trabajo se nota a partir del tercer mes.</p></div></div></div>
+        <div class="qa"><button aria-expanded="false">¿La inversión en anuncios está incluida en la cuota?<span class="plus"></span></button><div class="qa__a"><div><p>No. La inversión se paga directamente a cada plataforma desde tu cuenta. Nuestra cuota cubre estrategia, creatividad y gestión.</p></div></div></div>
+        <div class="qa"><button aria-expanded="false">¿Qué necesitáis para empezar?<span class="plus"></span></button><div class="qa__a"><div><p>Una llamada de 30 minutos para entender tu negocio y acceso de lectura a tus canales. Con eso preparamos una propuesta en una semana.</p></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="sec wrap contact" id="contacto">
+    <span class="mono mute">[ Contacto ] · Si has llegado hasta aquí, por algo será :)</span>
+    <h2 class="reveal" style="margin-top:28px"><span class="line"><span>¿Hablamos</span></span><span class="line"><span class="serif">de tu marca?</span></span></h2>
+    <div class="contact__grid">
+      <div class="contact__info">
+        <div style="display:grid;gap:12px">
+          <span class="legend">Escríbenos</span>
+          <span class="mail" id="mail">hola@elkiosko.agency</span>
+          <button class="copy" id="copy" type="button">Copiar email</button>
+        </div>
+        <div style="display:grid;gap:6px">
+          <span class="legend">Horario</span>
+          <span>Lunes a viernes · 9:00–18:00</span>
+        </div>
+        <div style="display:grid;gap:6px">
+          <span class="legend">Redes</span>
+          <span>Instagram · LinkedIn · Behance</span>
+        </div>
+      </div>
+      <form id="form" novalidate>
+        <div class="field"><label for="f-name">Nombre</label><input id="f-name" name="name" autocomplete="name" required></div>
+        <div class="field"><label for="f-mail">Email</label><input id="f-mail" name="email" type="email" autocomplete="email" required></div>
+        <div class="field"><label for="f-company">Empresa</label><input id="f-company" name="company" autocomplete="organization"></div>
+        <div class="field"><label for="f-budget">Presupuesto mensual</label>
+          <select id="f-budget" name="budget"><option>Menos de 1.000 €</option><option selected>1.000 – 3.000 €</option><option>3.000 – 6.000 €</option><option>Más de 6.000 €</option></select></div>
+        <div class="field full"><span class="legend">Me interesa</span>
+          <div class="pick">
+            <input type="checkbox" id="p1" name="svc" value="Estrategia"><label for="p1">Estrategia</label>
+            <input type="checkbox" id="p2" name="svc" value="Branding"><label for="p2">Branding</label>
+            <input type="checkbox" id="p3" name="svc" value="Performance" checked><label for="p3">Performance</label>
+            <input type="checkbox" id="p4" name="svc" value="Contenido"><label for="p4">Contenido</label>
+            <input type="checkbox" id="p5" name="svc" value="Web"><label for="p5">Web</label>
+            <input type="checkbox" id="p6" name="svc" value="SEO"><label for="p6">SEO</label>
+          </div></div>
+        <div class="field full"><label for="f-msg">Cuéntanos tu proyecto</label><textarea id="f-msg" name="message" placeholder="Qué vendes, a quién y qué te gustaría conseguir en los próximos 6 meses."></textarea></div>
+        <div class="send">
+          <p class="note" id="note" role="status">Te respondemos en menos de 24 h laborables.</p>
+          <button class="btn" type="submit"><span>Enviar mensaje</span><span>→</span></button>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div class="foot">
+    <div><span class="mono mute">EL KIOSKO® Agencia de marketing</span><p style="max-width:36ch;margin-top:10px">Estrategia, marca y performance para empresas que prefieren resultados a ruido.</p></div>
+    <div><span class="mono mute">Navegación</span><a href="#agencia">Agencia</a><a href="#servicios">Servicios</a><a href="#metodo">Método</a><a href="#planes">Planes</a><a href="#contacto">Contacto</a></div>
+    <div><span class="mono mute">Legal</span><a href="#inicio">Aviso legal</a><a href="#inicio">Privacidad</a><a href="#inicio">Cookies</a><span class="mute" style="margin-top:12px">© 2026 El Kiosko</span><button id="replay" type="button">Ver intro de nuevo ↺</button></div>
+  </div>
+  <div class="wordmark" id="wordmark" aria-hidden="true"><span>K</span><span>I</span><span>O</span><span>S</span><span>K</span><span>O</span></div>
+</footer>
+
+<script>
+(() => {
+  const root = document.documentElement;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+
+  /* Preloader: contador 000 → 100 y telón hacia arriba */
+  const loader = $('#loader'), count = $('#count');
+  const finish = () => { loader.classList.add('out'); setTimeout(() => root.classList.add('loaded'), 250); };
+  const intro = () => {
+    const t0 = performance.now(), dur = 1300;
+    const tick = now => {
+      const p = Math.min((now - t0) / dur, 1), e = 1 - Math.pow(1 - p, 3);
+      count.textContent = String(Math.round(e * 100)).padStart(3, '0');
+      p < 1 ? requestAnimationFrame(tick) : setTimeout(finish, 200);
+    };
+    requestAnimationFrame(tick);
+  };
+  if (reduce) root.classList.add('loaded'); else intro();
+  $('#replay').addEventListener('click', () => {
+    if (reduce) return;
+    count.textContent = '000';
+    root.classList.remove('loaded');
+    loader.classList.remove('out');
+    setTimeout(() => { scrollTo({ top: 0, behavior: 'instant' }); intro(); }, 1000);
+  });
+
+  /* Revelado al entrar en pantalla */
+  const targets = $$('.reveal, .fade, #wordmark');
+  if ('IntersectionObserver' in window && !reduce) {
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+    }), { rootMargin: '0px 0px -10% 0px' });
+    targets.forEach(t => io.observe(t));
+  } else targets.forEach(t => t.classList.add('is-in'));
+
+  /* Manifiesto: palabras que se iluminan con el scroll */
+  const man = $('#manifesto');
+  man.innerHTML = man.textContent.trim().split(/\s+/).map(w => `<span class="w">${w}</span>`).join(' ');
+  const words = [...man.querySelectorAll('.w')];
+
+  /* Scroll horizontal de sectores */
+  const hs = $('#sectores'), track = $('#track'), bar = $('#bar');
+  const wide = matchMedia('(min-width: 861px)');
+  let dist = 0;
+  const sizeH = () => {
+    if (!wide.matches || reduce) { hs.style.height = ''; track.style.transform = ''; dist = 0; return; }
+    dist = Math.max(0, track.scrollWidth - track.parentElement.clientWidth);
+    hs.style.height = (dist + innerHeight) + 'px';
+  };
+
+  /* Marquesina con inercia según la velocidad de scroll */
+  const rows = $$('.marquee__row').map(el => ({ el, dir: +el.dataset.dir, x: 0 }));
+  let lastY = scrollY, vel = 0;
+
+  /* Nav que se oculta al bajar */
+  const nav = $('#nav');
+  let navY = scrollY;
+
+  const onScroll = () => {
+    const y = scrollY;
+    nav.classList.toggle('hide', y > navY && y > 200 && !menu.classList.contains('open'));
+    navY = y;
+
+    const r = man.getBoundingClientRect();
+    const p = Math.min(Math.max((innerHeight * .8 - r.top) / (r.height + innerHeight * .3), 0), 1);
+    const lit = Math.round(p * words.length);
+    words.forEach((w, i) => w.classList.toggle('on', i < lit));
+
+    if (dist) {
+      const hr = hs.getBoundingClientRect();
+      const hp = Math.min(Math.max(-hr.top / (hs.offsetHeight - innerHeight), 0), 1);
+      track.style.transform = `translate3d(${-hp * dist}px,0,0)`;
+      bar.style.transform = `scaleX(${hp})`;
+    }
+  };
+
+  const loop = () => {
+    const y = scrollY;
+    vel += ((y - lastY) - vel) * .1; lastY = y;
+    rows.forEach(r => {
+      const w = r.el.firstElementChild.offsetWidth;
+      r.x += r.dir * (0.6 + Math.abs(vel) * .35);
+      if (r.x <= -w) r.x += w; if (r.x > 0) r.x -= w;
+      r.el.style.transform = `translate3d(${r.x}px,0,0)`;
+    });
+    requestAnimationFrame(loop);
+  };
+  if (!reduce) { rows.forEach(r => { if (r.dir > 0) r.x = -r.el.firstElementChild.offsetWidth / 2; }); requestAnimationFrame(loop); }
+
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', () => { sizeH(); onScroll(); });
+  document.fonts?.ready.then(() => { sizeH(); onScroll(); });
+  sizeH(); onScroll();
+
+  /* Menú móvil */
+  const menu = $('#menu'), burger = $('#burger'), bt = $('#burgerTxt');
+  const setMenu = open => {
+    menu.classList.toggle('open', open);
+    menu.setAttribute('aria-hidden', !open);
+    burger.setAttribute('aria-expanded', open);
+    bt.textContent = open ? 'Cerrar' : 'Menú'; bt.dataset.t = bt.textContent;
+  };
+  burger.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+
+  /* Cursor */
+  const cur = $('#cursor'), lab = $('#cursorLabel');
+  if (matchMedia('(hover:hover) and (pointer:fine)').matches && !reduce) {
+    let mx = innerWidth / 2, my = innerHeight / 2, cx = mx, cy = my;
+    addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    const follow = () => { cx += (mx - cx) * .18; cy += (my - cy) * .18; cur.style.transform = `translate3d(${cx}px,${cy}px,0)`; requestAnimationFrame(follow); };
+    follow();
+    $$('[data-cursor]').forEach(el => {
+      el.addEventListener('mouseenter', () => { lab.textContent = el.dataset.cursor; cur.classList.add('big'); });
+      el.addEventListener('mouseleave', () => cur.classList.remove('big'));
+    });
+  }
+
+  /* Preguntas frecuentes */
+  $$('.qa button').forEach(b => b.addEventListener('click', () => {
+    const qa = b.parentElement, open = !qa.classList.contains('open');
+    qa.classList.toggle('open', open); b.setAttribute('aria-expanded', open);
+  }));
+
+  /* Copiar email */
+  const copy = $('#copy');
+  copy.addEventListener('click', () => {
+    const txt = $('#mail').textContent;
+    const done = () => { copy.textContent = 'Copiado'; setTimeout(() => copy.textContent = 'Copiar email', 1800); };
+    const fallback = () => { const s = getSelection(), rg = document.createRange(); rg.selectNodeContents($('#mail')); s.removeAllRanges(); s.addRange(rg); copy.textContent = 'Seleccionado'; };
+    navigator.clipboard?.writeText(txt).then(done, fallback) ?? fallback();
+  });
+
+  /* Kiosko: pizarras que se amplían con sus subservicios */
+  const SVC = {
+    web: { kick: 'Pizarra 01 · Web', title: 'Página web', lead: 'Webs rápidas, claras y pensadas para convertir visitas en clientes.', items: [
+      ['Diseño UX/UI', 'Estructura y diseño pensados para tu cliente.'],
+      ['Webs corporativas', 'WordPress o a medida, fáciles de actualizar.'],
+      ['Tiendas online', 'Shopify y WooCommerce listas para vender.'],
+      ['Landing pages', 'Páginas de campaña enfocadas a conversión.'],
+      ['SEO técnico', 'Velocidad, indexación y estructura para Google.'],
+      ['Mantenimiento', 'Actualizaciones, copias de seguridad y soporte.'] ] },
+    branding: { kick: 'Pizarra 02 · Branding', title: 'Branding', lead: 'Una identidad que se reconoce a primera vista y se recuerda.', items: [
+      ['Naming', 'El nombre de tu marca, con dominio y registro.'],
+      ['Logotipo', 'Símbolo, tipografía y versiones para cada uso.'],
+      ['Identidad visual', 'Colores, tipografías, iconos y estilo de imagen.'],
+      ['Manual de marca', 'Las reglas para que todo se vea coherente.'],
+      ['Tono de voz', 'Cómo habla tu marca y qué palabras usa.'],
+      ['Packaging y papelería', 'Etiquetas, cajas, tarjetas y aplicaciones.'] ] },
+    redes: { kick: 'Pizarra 03 · Redes', title: 'Redes sociales', lead: 'Contenido con criterio y una comunidad que crece de verdad.', items: [
+      ['Estrategia de contenidos', 'Qué contar, a quién y en qué red.'],
+      ['Calendario editorial', 'Publicaciones planificadas mes a mes.'],
+      ['Foto y vídeo', 'Producción de reels, carruseles y sesiones.'],
+      ['Community management', 'Respuestas, mensajes y gestión diaria.'],
+      ['Publicidad social', 'Campañas en Meta y TikTok Ads.'],
+      ['Informe mensual', 'Alcance, interacción y resultados, sin humo.'] ] }
+  };
+  const sheet = $('#sheet'), sb = $('#sheetBoard'), kiosk = $('#kiosk');
+  let lastBoard = null;
+  setTimeout(() => kiosk.classList.add('settled'), 3200);
+  const flip = (a, b) => `translate(${a.left - b.left}px,${a.top - b.top}px) scale(${a.width / b.width},${a.height / b.height})`;
+  const openSheet = btn => {
+    const d = SVC[btn.dataset.svc]; lastBoard = btn;
+    $('#sheetKick').textContent = d.kick;
+    $('#sheetTitle').textContent = d.title;
+    $('#sheetLead').textContent = d.lead;
+    $('#sheetList').innerHTML = d.items.map(([n, t], i) => `<li style="--i:${i}"><b>${n}</b><span>${t}</span></li>`).join('');
+    sheet.hidden = false;
+    document.documentElement.style.overflow = 'hidden';
+    if (!reduce) sb.animate([{ transform: flip(btn.getBoundingClientRect(), sb.getBoundingClientRect()), opacity: .5 }, { transform: 'none', opacity: 1 }], { duration: 700, easing: 'cubic-bezier(.16,1,.3,1)' });
+    requestAnimationFrame(() => sheet.classList.add('open'));
+    $('.sheet__x').focus({ preventScroll: true });
+  };
+  const hideSheet = () => {
+    sheet.hidden = true; sheet.classList.remove('open');
+    document.documentElement.style.overflow = '';
+  };
+  const closeSheet = () => {
+    if (sheet.hidden) return;
+    sheet.classList.remove('open');
+    const done = () => { hideSheet(); lastBoard?.focus({ preventScroll: true }); };
+    if (reduce || !lastBoard) return done();
+    sb.animate([{ transform: 'none', opacity: 1 }, { transform: flip(lastBoard.getBoundingClientRect(), sb.getBoundingClientRect()), opacity: 0 }], { duration: 480, easing: 'cubic-bezier(.76,0,.24,1)' }).onfinish = done;
+  };
+  $$('.board').forEach(b => b.addEventListener('click', () => openSheet(b)));
+  $$('[data-close]').forEach(el => el.addEventListener('click', closeSheet));
+  $('#sheetCta').addEventListener('click', hideSheet);
+  addEventListener('keydown', e => { if (e.key === 'Escape') closeSheet(); });
+
+  /* Planes: cambio de canal con estática */
+  const plans = [
+    { name: 'Arranque', lead: 'Para poner orden y salir con buen pie.', inc: ['Auditoría y plan a 90 días', 'Revisión o creación de identidad básica', 'Gestión de 2 redes sociales', '1 campaña de pago activa', 'Informe mensual'], ideal: 'Marcas nuevas o que nunca han hecho marketing con método.', min: '3 meses' },
+    { name: 'Crecimiento', lead: 'Para marcas que ya venden y quieren vender más.', inc: ['Estrategia y plan trimestral', 'Campañas en Meta y Google', 'Producción de contenido mensual', 'Landing pages y CRO', 'Informe y reunión mensual'], ideal: 'Empresas con producto validado que necesitan escalar la captación.', min: '3 meses, renovables' },
+    { name: 'Escala', lead: 'Tu departamento de marketing, completo y externo.', inc: ['Dirección de marketing dedicada', 'Paid media multicanal', 'Contenido, web y SEO', 'Automatizaciones y CRM', 'Reuniones quincenales'], ideal: 'Empresas que quieren un equipo senior sin contratarlo en plantilla.', min: '6 meses' }
+  ];
+  const tabs = $$('.tv__tabs button'), chBody = $('#chBody'), chNum = $('#chNum'), noise = $('#noise');
+  const nctx = noise.getContext('2d'); noise.width = 160; noise.height = 100;
+  const img = nctx.createImageData(160, 100);
+  const staticFx = ms => {
+    if (reduce) return;
+    noise.classList.add('on');
+    const end = performance.now() + ms;
+    const draw = now => {
+      for (let i = 0; i < img.data.length; i += 4) { const v = Math.random() * 255; img.data[i] = img.data[i + 1] = img.data[i + 2] = v; img.data[i + 3] = 255; }
+      nctx.putImageData(img, 0, 0);
+      now < end ? requestAnimationFrame(draw) : noise.classList.remove('on');
+    };
+    requestAnimationFrame(draw);
+  };
+  const renderPlan = i => {
+    const p = plans[i];
+    chNum.textContent = `CH 0${i + 1} / 03`;
+    chBody.innerHTML = `<h3>${p.name}</h3><p class="lead serif">${p.lead}</p><div class="tv__cols"><div><span class="legend">Incluye</span><ul>${p.inc.map(x => `<li>${x}</li>`).join('')}</ul></div><div style="display:grid;gap:18px;align-content:start"><div style="display:grid;gap:6px"><span class="legend">Ideal para</span><p>${p.ideal}</p></div><div style="display:grid;gap:6px"><span class="legend">Compromiso mínimo</span><p>${p.min}</p></div><a href="#contacto" class="btn" style="justify-self:start"><span>Pedir propuesta</span><span>→</span></a></div></div>`;
+  };
+  tabs.forEach((t, i) => t.addEventListener('click', () => {
+    if (t.getAttribute('aria-selected') === 'true') return;
+    tabs.forEach(x => x.setAttribute('aria-selected', x === t));
+    staticFx(320);
+    setTimeout(() => renderPlan(i), reduce ? 0 : 140);
+  }));
+
+  /* Formulario (pendiente de conectar a un servicio de envío) */
+  const form = $('#form'), note = $('#note');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const name = $('#f-name').value.trim(), mail = $('#f-mail');
+    if (!name) { note.textContent = 'Escribe tu nombre para continuar.'; $('#f-name').focus(); return; }
+    if (!mail.value.trim() || !mail.checkValidity()) { note.textContent = 'Revisa el email: parece incompleto.'; mail.focus(); return; }
+    note.textContent = `Gracias, ${name}. Formulario de demostración: aún no está conectado a un correo.`;
+  });
+})();
+</script>
