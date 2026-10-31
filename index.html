@@ -1,5 +1,9 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>El Kiosko Agencia</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="El Kiosko, agencia de marketing: branding, diseño y desarrollo web, social media & content y SEO.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -133,6 +137,10 @@ section{position:relative}
 .sec__head .mono{grid-column:1 / span 3;padding-top:.7em}
 .sec__head h2{grid-column:4 / -1;font-size:clamp(2.2rem,5.6vw,5.4rem);line-height:.98;letter-spacing:-.04em}
 @media (max-width:760px){.sec__head .mono,.sec__head h2{grid-column:1 / -1}}
+/* Cabecera con la etiqueta encima y el título a la izquierda, como en Método y Sectores */
+.sec__head--stack{grid-template-columns:1fr;gap:20px}
+#planes .sec__head{margin-bottom:0}
+.sec__head--stack .mono,.sec__head--stack h2{grid-column:1 / -1;padding-top:0}
 
 /* Agencia / manifiesto */
 .manifesto{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
@@ -258,56 +266,77 @@ section{position:relative}
 @media (max-width:560px){.commit{grid-template-columns:1fr}.commit div,.commit div+div{padding:28px 0;border-left:0;border-top:1px solid var(--line);margin:0}.commit div:first-child{border-top:0}}
 
 /* FAQ */
-.faq{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
-.faq__list{grid-column:4 / -1;border-top:1px solid var(--line)}
-.qa{border-bottom:1px solid var(--line)}
-.qa button{width:100%;display:flex;justify-content:space-between;align-items:center;gap:24px;text-align:left;padding-block:26px;font-size:clamp(1.15rem,1.9vw,1.6rem);letter-spacing:-.02em}
-.qa .plus{position:relative;width:16px;height:16px;flex:none}
-.qa .plus::before,.qa .plus::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:currentColor;transition:transform .5s var(--ease)}
-.qa .plus::after{transform:rotate(90deg)}
-.qa.open .plus::after{transform:rotate(0)}
-.qa__a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .6s var(--ease)}
-.qa.open .qa__a{grid-template-rows:1fr}
-.qa__a>div{overflow:hidden}
-.qa__a p{color:var(--mute);max-width:60ch;padding-bottom:28px}
-@media (max-width:760px){.faq__list{grid-column:1 / -1}}
 
 /* Contacto */
 .contact{border-top:1px solid var(--line)}
-.contact h2{font-size:clamp(3.4rem,15vw,15rem);line-height:.86;letter-spacing:-.06em;font-weight:500}
-.contact h2 .serif{font-weight:300}
-.contact__grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;margin-top:clamp(48px,7vw,100px)}
-.contact__info{grid-column:1 / span 4;display:grid;gap:28px;align-content:start;min-width:0}
-.mail{font-size:clamp(1.3rem,2.2vw,1.9rem);letter-spacing:-.02em;user-select:all;word-break:break-all}
-.copy{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);border-radius:999px;padding:6px 14px;justify-self:start;transition:background .3s,color .3s}
-.copy:hover{background:var(--bone);color:var(--ink)}
-form{grid-column:6 / -1;display:grid;grid-template-columns:1fr 1fr;gap:34px 28px;min-width:0}
-.field{display:grid;gap:8px;min-width:0}
-.field.full{grid-column:1 / -1}
+/* Contacto: columna estrecha y centrada; campos sin caja, solo una línea que se vuelve lavanda al pulsar */
+.contact__col{width:min(100%,720px);margin-inline:auto}
+.contact .sec__head{margin-bottom:0}
+.contact__lead{margin:22px 0 clamp(32px,4vw,48px);max-width:52ch;color:var(--mute)}
+.brief{display:grid;grid-template-columns:1fr 1fr;gap:12px 14px;grid-column:auto}
+.fld{border-bottom:1px solid var(--line);background:linear-gradient(var(--accent),var(--accent)) 0 100%/0 1px no-repeat;transition:background-size .6s var(--ease-out)}
+.fld:focus-within{background-size:100% 1px}
+.fld--full{grid-column:1 / -1}
+.fld input,.fld textarea{display:block;width:100%;min-height:0;margin:0;padding:14px 16px;border:0;font:400 .95rem/1.5 var(--f-body);color:var(--bone);background:transparent;resize:none}
+.fld textarea{min-height:110px;overflow:hidden}
+.fld ::placeholder{color:var(--mute);opacity:1;transition:opacity .3s}
+.fld :focus::placeholder{opacity:.45}
+.fld :focus-visible{outline:none}
+.consent{grid-column:1 / -1;display:flex;gap:12px;align-items:flex-start;margin-top:18px;font:400 .88rem/1.5 var(--f-body);letter-spacing:0;text-transform:none;color:var(--bone);cursor:pointer}
+.consent input{appearance:none;flex:none;width:18px;height:18px;margin:1px 0 0;padding:0;border:1px solid var(--mute);border-radius:4px;display:grid;place-content:center;cursor:pointer;transition:background .3s,border-color .3s}
+.consent input::after{content:"";width:9px;height:5px;border:2px solid var(--ink);border-top:0;border-right:0;transform:rotate(-45deg) translate(1px,-1px) scale(0);transition:transform .3s var(--ease-out)}
+.consent input:checked{background:var(--accent);border-color:var(--accent)}
+.consent input:checked::after{transform:rotate(-45deg) translate(1px,-1px) scale(1)}
+.consent input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.consent a,.consent__info a{text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:3px}
+.consent__info{grid-column:1 / -1;margin:0;font-size:.75rem;line-height:1.6;color:var(--mute)}
+.brief__foot{grid-column:1 / -1;display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:22px}
+.brief__foot .note{margin:0;color:var(--mute);font-size:.85rem}
+.brief__done{grid-column:1 / -1;display:none;gap:12px;justify-items:start}
+.brief.sent>:not(.brief__done){display:none}
+.brief.sent .brief__done{display:grid;animation:brief-in .9s var(--ease-out)}
+.brief__done h3{font-size:clamp(1.5rem,2.4vw,2.1rem);font-weight:700;letter-spacing:-.03em;line-height:1.1}
+.brief__done p{margin:0;color:var(--mute)}
+@keyframes brief-in{from{opacity:0;transform:translateY(20px)}}
+@media (max-width:600px){.brief{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.fld{transition:none}.brief.sent .brief__done{animation:none}}
 label,.legend{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
 input,select,textarea{font:inherit;color:var(--bone);background:transparent;border:0;border-bottom:1px solid var(--line);padding:10px 0;border-radius:0;outline:none;transition:border-color .4s;width:100%}
 select option{background:var(--ink-2)}
 textarea{resize:vertical;min-height:110px}
 input:focus,select:focus,textarea:focus{border-color:var(--bone)}
-.pick{display:flex;flex-wrap:wrap;gap:8px}
-.pick input{position:absolute;opacity:0;width:1px;height:1px}
-.pick label{font-size:.72rem;color:var(--bone);border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer;transition:background .3s,color .3s,border-color .3s}
-.pick input:checked+label{background:var(--bone);color:var(--ink);border-color:var(--bone)}
-.pick input:focus-visible+label{outline:1px solid var(--accent);outline-offset:3px}
 .send{grid-column:1 / -1;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;gap:14px;background:var(--bone);color:var(--ink);border-radius:999px;padding:16px 28px;font-weight:500;position:relative;overflow:hidden}
 .btn::before{content:"";position:absolute;inset:0;background:var(--accent);transform:translateY(101%);transition:transform .6s var(--ease)}
 .btn:hover::before{transform:none}
 .btn>*{position:relative}
 .note{color:var(--mute);font-size:.9rem;min-height:1.5em}
-@media (max-width:860px){.contact__info,form{grid-column:1 / -1}form{grid-template-columns:1fr}}
 
 /* Footer */
 footer{border-top:1px solid var(--line);padding-top:56px;overflow:hidden}
-.foot{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
-.foot>div{grid-column:span 3;display:grid;gap:8px;align-content:start;min-width:0}
-.foot>div:first-child{grid-column:span 6}
-.foot a{width:max-content;max-width:100%}
+/* Footer: marca y propuesta de valor con las palabras clave, servicios, agencia y datos de contacto (NAP) */
+.foot{display:grid;grid-template-columns:repeat(12,1fr);gap:40px 24px}
+.foot__brand{grid-column:span 5;display:grid;gap:16px;align-content:start;min-width:0}
+.foot__brand p{margin:0}
+.foot__pitch{max-width:40ch;font-size:clamp(1.05rem,1.3vw,1.2rem);line-height:1.55}
+.foot__pitch strong{font-weight:500;color:var(--accent)}
+.foot__cta{justify-self:start;display:inline-flex;gap:10px;font-family:var(--f-display);font-weight:600;border-bottom:1px solid var(--accent);padding-bottom:4px;transition:color .3s}
+.foot__cta span{transition:transform .4s var(--ease-out)}
+.foot__cta:hover{color:var(--accent)}
+.foot__cta:hover span{transform:translateX(4px)}
+.foot__col{grid-column:span 2;display:grid;gap:10px;align-content:start;min-width:0}
+.foot__col:last-child{grid-column:span 3}
+.foot__h{font-size:.72rem;margin:0 0 6px;line-height:1.4}
+.foot a{width:max-content;max-width:100%;transition:color .3s}
+.foot__col a:hover,.foot__legal a:hover{color:var(--accent)}
+.foot__nap{font-style:normal;display:grid;gap:10px}
+.foot__social{display:flex;gap:18px;margin-top:10px;color:var(--mute)}
+.foot__bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px 28px;margin-top:clamp(48px,6vw,80px);padding-top:22px;border-top:1px solid var(--line);font-size:.85rem}
+.foot__legal{display:flex;flex-wrap:wrap;gap:8px 24px}
+/* Datos pendientes de rellenar: se ven en lavanda para que no se escapen */
+.tbd{outline:1px dashed rgba(167,139,250,.6);outline-offset:2px;border-radius:3px}
+@media (max-width:960px){.foot__brand{grid-column:1 / -1}.foot__col,.foot__col:last-child{grid-column:span 4}}
+@media (max-width:600px){.foot__col,.foot__col:last-child{grid-column:1 / -1}}
 @media (max-width:760px){.foot>div,.foot>div:first-child{grid-column:1 / -1}}
 .wordmark{display:flex;justify-content:space-between;font-weight:800;font-size:clamp(4.5rem,24.5vw,30rem);line-height:.78;letter-spacing:-.05em;font-variation-settings:"wdth" 125;margin-top:clamp(56px,8vw,120px);padding-bottom:max(12px,env(safe-area-inset-bottom,0px));overflow:hidden}
 .wordmark span{display:inline-block}
@@ -316,31 +345,45 @@ footer{border-top:1px solid var(--line);padding-top:56px;overflow:hidden}
 .wordmark span:nth-child(2){transition-delay:.06s}.wordmark span:nth-child(3){transition-delay:.12s}.wordmark span:nth-child(4){transition-delay:.18s}.wordmark span:nth-child(5){transition-delay:.24s}.wordmark span:nth-child(6){transition-delay:.3s}
 
 /* Planes: selector de canales */
-/* Planes: tarjetas fijas que se apilan; la de debajo se encoge, se oscurece y asoma su cabecera */
-.stack{display:grid;gap:clamp(20px,3vh,32px);margin-top:clamp(40px,6vw,80px);padding-bottom:6vh}
-.plan{--top:calc(env(safe-area-inset-top,0px) + 84px + var(--i) * 34px);position:sticky;top:var(--top);min-height:min(78vh,720px);display:grid;grid-template-rows:auto 1fr;gap:28px;padding:clamp(24px,3.4vw,52px);border-radius:24px;background:var(--ink);color:var(--bone);border:1px solid var(--line);transform-origin:50% 0;transform:scale(calc(1 - var(--c,0) * .06));filter:brightness(calc(1 - var(--c,0) * .45));will-change:transform}
-.plan--dark{--ink:#161616;--line:#2C2C2C}
-.plan--accent{--ink:#A78BFA;--bone:#0B0B0B;--mute:rgba(11,11,11,.68);--line:rgba(11,11,11,.18);--accent:#0B0B0B}
-.plan--light{--ink:#F6F5F0;--bone:#0B0B0B;--mute:#6B6B6B;--line:#E2DFD8;--accent:#8B6CF2}
-.plan__top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
-.plan__top .mono{color:var(--mute);padding-top:.8em;text-align:right}
-.plan__n{font-family:var(--f-display);font-weight:700;font-size:clamp(4rem,9vw,8.5rem);line-height:.8;letter-spacing:-.05em;color:var(--accent)}
-.plan__main{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,4vw,64px);align-items:end}
-.plan__title{display:grid;gap:14px}
-.plan h3{font-size:clamp(2.4rem,5.4vw,5.2rem);font-weight:700;line-height:.95;letter-spacing:-.045em}
-.plan__lead{font-family:var(--f-display);font-style:italic;font-weight:500;font-size:clamp(1.05rem,1.5vw,1.35rem);color:var(--mute);max-width:30ch}
-.plan__cols{display:grid;grid-template-columns:1fr 1fr;gap:28px;border-top:1px solid var(--line);padding-top:24px}
-.plan__cols ul{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:9px}
-.plan__cols li::before{content:"↗ ";color:var(--accent)}
-.plan__side{display:grid;gap:22px;align-content:space-between}
-.plan__side p{color:var(--mute);margin-top:8px}
-.plan__side .btn{justify-self:start}
-/* el contenido de cada tarjeta entra en cascada cuando llega arriba */
-.js .plan .plan__main>*{opacity:0;transform:translateY(18px);transition:opacity .8s var(--ease-out),transform .9s var(--ease-out)}
-.js .plan .plan__main>:nth-child(2){transition-delay:.12s}
-.js .plan.is-in .plan__main>*{opacity:1;transform:none}
-@media (max-width:860px){.plan{min-height:0;--top:calc(env(safe-area-inset-top,0px) + 70px + var(--i) * 18px)}.plan__main,.plan__cols{grid-template-columns:1fr}}
-@media (prefers-reduced-motion:reduce){.plan{transform:none;filter:none}.js .plan .plan__main>*{opacity:1;transform:none}}
+/* Planes: escalones. La sección se fija; al bajar, cada columna se llena de lavanda y el plan de la derecha cambia */
+.tiers{position:relative;height:calc(100vh + 3 * 75vh)}
+.tiers__pin{position:sticky;top:0;height:100vh;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,5vw,96px);align-content:start;align-items:center;padding-block:clamp(56px,9vh,104px) 6vh}
+.ladder{display:grid;gap:18px;height:min(64vh,580px);grid-template-rows:1fr auto}
+.ladder__rungs{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.2vw,16px);align-items:end}
+.rung{--f:0;position:relative;height:var(--h);display:grid;align-content:start;gap:10px;padding:clamp(14px,1.4vw,20px);border:1px solid var(--line);border-radius:18px;background:var(--ink-2);color:var(--mute);font:inherit;text-align:left;cursor:pointer;overflow:hidden;transition:color .5s var(--ease-out),border-color .5s var(--ease-out)}
+.rung::before{content:"";position:absolute;inset:0;background:var(--accent);transform-origin:50% 100%;transform:scaleY(var(--f))}
+.rung>*{position:relative}
+.rung__n{font-family:var(--f-display);font-weight:700;font-size:clamp(1.8rem,3.4vw,3.2rem);line-height:.8;letter-spacing:-.05em}
+.rung.on{color:var(--bone);border-color:var(--accent)}
+.rung.done{color:var(--ink);border-color:var(--accent)}
+.rung:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.ladder__foot{display:flex;justify-content:space-between;gap:16px;color:var(--mute);border-top:1px solid var(--line);padding-top:14px}
+.tiers__body{display:grid}
+.tier{display:grid;gap:clamp(20px,3vh,32px)}
+.tier__meta{display:flex;justify-content:space-between;gap:16px;color:var(--mute);border-bottom:1px solid var(--line);padding-bottom:16px}
+.tier h3{font-size:clamp(2.6rem,5.2vw,5rem);font-weight:700;line-height:.92;letter-spacing:-.05em;overflow:hidden;padding-bottom:.08em}
+.tier h3>span{display:block}
+.tier__lead{font-family:var(--f-display);font-style:italic;font-weight:500;font-size:clamp(1.05rem,1.5vw,1.35rem);color:var(--accent);max-width:34ch}
+.tier__cols{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.tier__cols ul{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:9px}
+.tier__cols li::before{content:"↗ ";color:var(--accent)}
+.tier__side{display:grid;gap:22px;align-content:space-between}
+.tier__side p{color:var(--mute);margin-top:8px}
+.tier__side .btn{justify-self:start}
+/* Solo en escritorio y con JS: los tres planes ocupan la misma celda y entran y salen en la dirección del scroll */
+@media (min-width:861px){
+  .js .tier{grid-area:1/1;visibility:hidden;pointer-events:none;transition:visibility 0s .8s}
+  .js .tier.on{visibility:visible;pointer-events:auto;transition:none}
+  .js .tier h3>span{transform:translateY(105%);transition:transform .9s var(--ease-out)}
+  .js .tier.past h3>span{transform:translateY(-105%)}
+  .js .tier.on h3>span{transform:none}
+  .js .tier .fx{opacity:0;transform:translateY(22px);transition:opacity .45s var(--ease-out),transform .7s var(--ease-out)}
+  .js .tier.past .fx{transform:translateY(-22px)}
+  .js .tier.on .fx{opacity:1;transform:none;transition-delay:calc(.15s + var(--k,0) * 60ms)}
+}
+@media (min-width:861px) and (max-height:760px){.tier h3{font-size:clamp(2.3rem,4.4vw,4rem)}.tier__cols ul{gap:5px}}
+@media (max-width:860px){.tiers{height:auto}.tiers__pin{position:static;height:auto;display:block;padding:0}.ladder{display:none}.tiers__body{gap:56px}.tier__cols{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.rung,.js .tier h3>span,.js .tier .fx{transition:none}}
 #replay{justify-self:start;text-align:left;color:var(--mute);transition:color .3s}
 #replay:hover{color:var(--accent)}
 
@@ -358,13 +401,12 @@ h1,h2,h3,.logo,.loader__count,.menu a.big,.marquee__row span,.wordmark,.path,.tv
 .card h3,.tv__body h3,.pillar h3,.step h3,.commit h3{font-weight:600;letter-spacing:-.02em}
 .marquee__row span{font-size:clamp(1.9rem,5.4vw,5.4rem);font-weight:700;letter-spacing:-.03em}
 .manifesto p.big{font-weight:500;letter-spacing:-.02em}
-.contact h2{font-size:clamp(2.6rem,10.5vw,10.5rem);font-weight:700;letter-spacing:-.04em;line-height:.95}
 .wordmark{font-size:clamp(3.6rem,20vw,24rem);letter-spacing:-.02em}
 .menu a.big{font-weight:600;letter-spacing:-.03em}
 /* Secciones claras sobre blanco roto */
 .light{--ink:#F6F5F0;--ink-2:#FFFFFF;--line:#E2DFD8;--mute:#6B6B6B;--bone:#0B0B0B;--accent:#8B6CF2;background:var(--ink);color:var(--bone)}
 
-/* ---------- Hero con kiosko y vitrinas ---------- */
+/* ---------- Hero con kiosko y carteles ---------- */
 .hero{padding-bottom:clamp(32px,5vh,64px);gap:clamp(24px,4vh,48px)}
 .hero__grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:center}
 .hero__copy{grid-column:1 / span 5;display:grid;gap:28px;min-width:0;align-self:end;padding-bottom:clamp(24px,6vw,96px)}
@@ -381,35 +423,56 @@ h1,h2,h3,.logo,.loader__count,.menu a.big,.marquee__row span,.wordmark,.path,.tv
 .js.loaded .kiosk__sign{opacity:1;transform:none}
 @media (max-width:900px){.hero__copy,.kiosk{grid-column:1 / -1}.kiosk{margin-block:0}}
 
-/* Vitrinas: la puerta, el escaparate y la vitrina del dibujo; al pasar se abren y despliegan su panel */
-.vit{position:absolute;left:var(--x);top:var(--y);width:var(--w);height:var(--h);z-index:2;perspective:900px}
-.vit::before{content:"";position:absolute;inset:0;border:1px solid var(--accent);border-radius:2px;background:rgba(167,139,250,.06);transform-origin:var(--hinge);transition:transform .8s var(--ease-out),background .4s;animation:glow 3.2s ease-in-out infinite;animation-delay:var(--d)}
-@keyframes glow{50%{background:rgba(167,139,250,.15);box-shadow:0 0 22px rgba(167,139,250,.22)}}
-.vit.open::before{transform:rotateY(var(--ry,0deg)) rotateX(var(--rx,0deg));background:rgba(167,139,250,.2);animation:none}
-.vit__tag{position:absolute;left:50%;bottom:0;transform:translate(-50%,50%);white-space:nowrap;font-family:var(--f-display);font-size:max(10px,1.25cqw);font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);background:var(--ink);border:1px solid var(--accent);border-radius:999px;padding:.5em .9em;transition:background .3s,color .3s}
-.vit.open .vit__tag{background:var(--accent);color:var(--accent-ink)}
+/* Pizarras de kiosko: tablero negro con marco metálico, cada una a su altura; las colgadas se balancean y la de caballete apenas se mece */
+.vit{position:absolute;left:var(--x);top:var(--y);width:var(--w);aspect-ratio:var(--ar);translate:-50% 0;z-index:2}
+.vit__tag{position:absolute;inset:0;display:grid;grid-template-rows:auto 1fr auto;gap:.4em;padding:1.3cqw 1.4cqw 1.1cqw;text-align:left;font-family:var(--f-display);color:var(--bone);background:repeating-linear-gradient(180deg,#161616 0 3px,#101010 3px 5px);border:max(2px,.45cqw) solid;border-color:#B8B8B8 #6E6E6E #555 #9A9A9A;border-radius:3px;box-shadow:inset 0 0 0 1px #000,inset 0 0 2cqw rgba(0,0,0,.7),0 1.4cqw 3cqw rgba(0,0,0,.6);transform-origin:50% calc(var(--cord) * -1);rotate:var(--tilt);animation:sway 4.2s ease-in-out infinite;animation-delay:calc(var(--d) * -5);transition:border-color .4s,scale .4s var(--ease-out)}
+/* las dos cadenas que la cuelgan del toldo */
+.vit__tag::before,.vit__tag::after{content:"";position:absolute;bottom:calc(100% + max(2px,.45cqw));width:1px;height:var(--cord);background:linear-gradient(#5A5A5A,#A0A0A0)}
+.vit__tag::before{left:16%}.vit__tag::after{right:16%}
+.vit__n{display:flex;justify-content:space-between;align-items:center;gap:6px;white-space:nowrap;font-size:max(8px,.9cqw);font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.vit__n span+span{font-size:.7em;color:var(--accent)}
+.vit__t{align-self:center;font-size:var(--fs);font-weight:700;letter-spacing:.03em;line-height:1.02;text-transform:uppercase}
+.vit__more{display:flex;justify-content:space-between;white-space:nowrap;padding-top:.7em;border-top:1px solid #2C2C2C;font-size:max(8px,.9cqw);font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);transition:color .3s}
+@keyframes sway{0%,100%{rotate:calc(var(--tilt) - var(--amp,1.8deg))}50%{rotate:calc(var(--tilt) + var(--amp,1.8deg))}}
+/* la de caballete se apoya en el suelo: sin cadenas y con dos patas */
+.vit--easel .vit__tag{transform-origin:50% 100%;--amp:.5deg}
+.vit--easel .vit__tag::before,.vit--easel .vit__tag::after{display:none}
+.vit--easel::before,.vit--easel::after{content:"";position:absolute;top:92%;width:max(2px,.45cqw);height:16%;background:#7A7A7A}
+.vit--easel::before{left:14%;rotate:9deg}.vit--easel::after{right:14%;rotate:-9deg}
+.vit:hover .vit__tag,.vit.open .vit__tag{border-color:var(--accent);scale:1.04}
+.vit:hover .vit__more,.vit.open .vit__more{color:var(--accent)}
+.vit.open .vit__tag{animation-play-state:paused}
+.vit:focus-visible{outline:none}
+.vit:focus-visible .vit__tag{outline:2px solid var(--bone);outline-offset:3px}
+@container (max-width:460px){.vit__t{font-size:calc(var(--fs) * 1.25)}.vit__n span+span{display:none}}
 .js .vit{opacity:0;transition:opacity .8s;transition-delay:calc(var(--d) + 1s)}
 .js.loaded .vit{opacity:1}
 
-.vit__info{position:absolute;z-index:4;width:62cqw;display:grid;gap:14px;padding:clamp(18px,3.2cqw,32px);background:var(--ink-2);border:1px solid var(--line);border-top:2px solid var(--accent);border-radius:4px;box-shadow:0 24px 60px rgba(0,0,0,.55);font-family:var(--f-body);font-size:clamp(13px,2cqw,16px);line-height:1.45;color:var(--bone);clip-path:var(--from);visibility:hidden;transition:clip-path .7s var(--ease),visibility 0s .7s}
-.vit__info.open{clip-path:inset(0);visibility:visible;transition:clip-path .7s var(--ease),visibility 0s}
-.vit__info[data-svc=web]{left:30%;top:40%;--from:inset(0 100% 0 0)}
-/* el escaparate se despliega hacia abajo, centrado sobre el propio kiosko */
-.vit__info[data-svc=branding]{left:19%;top:46%;--from:inset(0 0 100% 0)}
-.vit__info[data-svc=redes]{right:31.3%;top:40%;--from:inset(0 0 0 100%)}
-/* el mostrador se despliega hacia arriba, centrado */
-.vit__info[data-svc=seo]{left:19%;bottom:30%;--from:inset(100% 0 0 0)}
-.vit__info .mono{color:var(--accent);font-size:.72em}
-.vit__info h3{font-family:var(--f-display);font-size:clamp(1.4rem,3.8cqw,2.3rem);font-weight:700;letter-spacing:-.02em;line-height:1.05}
-.vit__info p{color:var(--mute)}
-.vit__info ul{list-style:none;margin:0;padding:12px 0 0;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr;gap:8px 16px}
+/* La pizarra grande: se despliega hacia abajo con sus subservicios y se balancea hasta quedarse quieta */
+.vit__info{--print:#F6F5F0;--ink-soft:#A0A0A0;position:absolute;z-index:4;width:62cqw;display:grid;gap:14px;padding:clamp(22px,3.4cqw,34px) clamp(18px,3.2cqw,32px) clamp(14px,2cqw,20px);background:repeating-linear-gradient(180deg,#161616 0 3px,#101010 3px 5px);color:var(--print);border:3px solid;border-color:#B8B8B8 #6E6E6E #555 #9A9A9A;border-radius:4px;box-shadow:0 30px 60px rgba(0,0,0,.6);font-family:var(--f-body);font-size:clamp(13px,2cqw,16px);line-height:1.45;transform-origin:50% 0;clip-path:inset(-24px -60px 100% -60px);visibility:hidden;transition:clip-path .75s var(--ease),visibility 0s .75s}
+.vit__info.open{clip-path:inset(-24px -60px -80px -60px);visibility:visible;transition:clip-path .75s var(--ease),visibility 0s;animation:hang 1.3s var(--ease-out)}
+@keyframes hang{0%{rotate:-4deg}35%{rotate:2.2deg}65%{rotate:-1deg}85%{rotate:.4deg}100%{rotate:0deg}}
+/* dos cadenas cortas de las que cuelga */
+.vit__info::before,.vit__info::after{content:"";position:absolute;bottom:calc(100% + 3px);width:1px;height:3cqw;background:linear-gradient(#5A5A5A,#A0A0A0)}
+.vit__info::before{left:16%}.vit__info::after{right:16%}
+/* cada póster se abre junto a su pizarra */
+.vit__info[data-svc=web]{left:3%;top:48%}
+.vit__info[data-svc=branding]{left:19%;top:45%}
+.vit__info[data-svc=redes]{right:3%;top:50%}
+.vit__info[data-svc=seo]{left:30%;top:40%}
+.vit__info .mono{color:var(--ink-soft);font-size:.72em;display:flex;justify-content:space-between;gap:12px;border-bottom:2px solid var(--print);padding-bottom:10px}
+.vit__info h3{font-family:var(--f-display);font-size:clamp(1.6rem,4.6cqw,2.9rem);font-weight:800;letter-spacing:-.035em;line-height:.95;text-transform:uppercase}
+.vit__info p{color:var(--ink-soft);margin:0}
+.vit__info ul{list-style:none;margin:0;padding:12px 0 0;border-top:1px solid #2C2C2C;display:grid;grid-template-columns:1fr 1fr;gap:8px 16px}
 .vit__info li{font-family:var(--f-display);font-weight:600;letter-spacing:-.01em;opacity:0;transform:translateY(8px);transition:opacity .4s,transform .5s var(--ease-out)}
 .vit__info li::before{content:"↗ ";color:var(--accent)}
-.vit__info.open li{opacity:1;transform:none;transition-delay:calc(var(--i) * 50ms + .25s)}
-.vit__cta{justify-self:start;font-family:var(--f-display);font-weight:600;color:var(--accent);border-bottom:1px solid transparent;transition:border-color .3s}
-.vit__cta:hover{border-color:currentColor}
+.vit__info.open li{opacity:1;transform:none;transition-delay:calc(var(--i) * 50ms + .35s)}
+/* el pie de la pizarra con la llamada a pedir presupuesto */
+.vit__cta{display:flex;justify-content:space-between;align-items:center;margin-top:4px;padding-top:12px;border-top:1px dashed rgba(246,245,240,.3);font-family:var(--f-display);font-weight:700;color:var(--print);transition:color .3s}
+.vit__cta::after{content:none}
+.vit__cta:hover{color:var(--accent)}
 @container (max-width:460px){.vit__info[data-svc]{left:3%;right:auto;top:4%;bottom:auto;width:94cqw}}
-@media (prefers-reduced-motion:reduce){.vit::before{animation:none}.js .vit{opacity:1}.js .kiosk img{opacity:1;transform:none}.js .kiosk__sign{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.vit__tag{animation:none}.vit__info.open{animation:none}.js .vit{opacity:1}.js .kiosk img{opacity:1;transform:none}.js .kiosk__sign{opacity:1;transform:none}}
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{transition-duration:.01ms!important;animation:none!important}
@@ -422,7 +485,14 @@ h1,h2,h3,.logo,.loader__count,.menu a.big,.marquee__row span,.wordmark,.path,.tv
   html{scroll-behavior:auto}
 }
 </style>
-
+<link rel="canonical" href="https://claudiakora23-cell.github.io/el-kiosko/">
+<meta property="og:title" content="El Kiosko · Agencia de marketing en Málaga">
+<meta property="og:description" content="Branding, diseño y desarrollo web, social media & content y SEO.">
+<meta property="og:image" content="https://claudiakora23-cell.github.io/el-kiosko/kiosko.jpg">
+<meta property="og:url" content="https://claudiakora23-cell.github.io/el-kiosko/">
+<meta property="og:type" content="website">
+</head>
+<body>
 <div class="loader" id="loader" aria-hidden="true">
   <div class="loader__top wrap"><span class="mono">EL KIOSKO®</span><span class="mono">Agencia de marketing</span></div>
   <div class="loader__count wrap" id="count">000</div>
@@ -452,7 +522,7 @@ h1,h2,h3,.logo,.loader__count,.menu a.big,.marquee__row span,.wordmark,.path,.tv
     <li><a class="big" href="#planes"><span class="line"><span>Planes</span></span></a></li>
     <li><a class="big" href="#contacto"><span class="line"><span>Contacto</span></span></a></li>
   </ul>
-  <p class="mono mute">hola@elkiosko.agency</p>
+  <p class="mono mute">elkioskoagency@gmail.com</p>
 </div>
 
 <main>
@@ -469,15 +539,15 @@ h1,h2,h3,.logo,.loader__count,.menu a.big,.marquee__row span,.wordmark,.path,.tv
           <span class="line"><span>tu marca necesita,</span></span>
           <span class="line">en <span class="serif">El Kiosko.</span></span>
         </h1>
-        <span class="mono mute">Pasa por las vitrinas para ver qué hay dentro ↘</span>
+        <span class="mono mute">Pasa por las pizarras para ver qué hay en el kiosko ↘</span>
       </div>
       <div class="kiosk" id="kiosk">
         <img src="kiosko.jpg" alt="Ilustración de un kiosko con toldo de rayas y el rótulo El Kiosko" width="1400" height="1400">
         <span class="kiosk__sign" aria-hidden="true"><span>EL KIOSKO<sup>®</sup></span></span>
-        <button class="vit" type="button" data-svc="web" aria-expanded="false" aria-controls="vit-web" style="--x:10%;--y:45%;--w:18.2%;--h:42.5%;--hinge:left center;--ry:-58deg;--d:0s"><span class="vit__tag">Web +</span></button>
-        <button class="vit" type="button" data-svc="branding" aria-expanded="false" aria-controls="vit-branding" style="--x:34.6%;--y:48%;--w:30.9%;--h:19.6%;--hinge:center top;--rx:58deg;--d:.15s"><span class="vit__tag">Branding +</span></button>
-        <button class="vit" type="button" data-svc="redes" aria-expanded="false" aria-controls="vit-redes" style="--x:70.7%;--y:48.4%;--w:12.5%;--h:33.4%;--hinge:right center;--ry:58deg;--d:.3s"><span class="vit__tag">Social media +</span></button>
-        <button class="vit" type="button" data-svc="seo" aria-expanded="false" aria-controls="vit-seo" style="--x:34.5%;--y:71.4%;--w:31.9%;--h:10.6%;--hinge:center bottom;--rx:-58deg;--d:.45s"><span class="vit__tag">SEO +</span></button>
+        <button class="vit" type="button" data-svc="web" aria-expanded="false" aria-controls="vit-web" style="--x:19%;--y:50%;--w:15cqw;--ar:3/4;--cord:7.5cqw;--fs:2.6cqw;--tilt:-2deg;--d:0s"><span class="vit__tag"><span class="vit__n"><span>N.º 01</span><span>●</span></span><b class="vit__t">Web</b><span class="vit__more"><span>Ver</span><span>+</span></span></span></button>
+        <button class="vit" type="button" data-svc="branding" aria-expanded="false" aria-controls="vit-branding" style="--x:50%;--y:46.5%;--w:24cqw;--ar:16/9;--cord:4cqw;--fs:3cqw;--tilt:1deg;--d:.15s"><span class="vit__tag"><span class="vit__n"><span>N.º 02</span><span>●</span></span><b class="vit__t">Branding</b><span class="vit__more"><span>Ver</span><span>+</span></span></span></button>
+        <button class="vit" type="button" data-svc="redes" aria-expanded="false" aria-controls="vit-redes" style="--x:77%;--y:52%;--w:13cqw;--ar:4/5;--cord:9.5cqw;--fs:1.9cqw;--tilt:2.5deg;--d:.3s"><span class="vit__tag"><span class="vit__n"><span>N.º 03</span><span>●</span></span><b class="vit__t">Social<br>media</b><span class="vit__more"><span>Ver</span><span>+</span></span></span></button>
+        <button class="vit vit--easel" type="button" data-svc="seo" aria-expanded="false" aria-controls="vit-seo" style="--x:58%;--y:68.5%;--w:14cqw;--ar:4/5;--cord:0px;--fs:3cqw;--tilt:-1deg;--d:.45s"><span class="vit__tag"><span class="vit__n"><span>N.º 04</span><span>●</span></span><b class="vit__t">SEO</b><span class="vit__more"><span>Ver</span><span>+</span></span></span></button>
         <div class="vit__info" id="vit-web" data-svc="web"></div>
         <div class="vit__info" id="vit-branding" data-svc="branding"></div>
         <div class="vit__info" id="vit-redes" data-svc="redes"></div>
@@ -583,126 +653,149 @@ h1,h2,h3,.logo,.loader__count,.menu a.big,.marquee__row span,.wordmark,.path,.tv
     </div>
   </section>
 
-  <!-- PLANES (tarjetas que se apilan al bajar) -->
-  <section class="sec wrap" id="planes" style="border-top:1px solid var(--line)">
-    <div class="sec__head">
+  <!-- PLANES (escalones: la sección se fija y cada columna se llena al bajar) -->
+  <section class="sec wrap" id="planes" style="border-top:1px solid var(--line);padding-bottom:0">
+    <div class="sec__head sec__head--stack">
       <span class="mono mute">[ Planes ]</span>
-      <h2 class="reveal"><span class="line"><span>Elige el plan</span></span><span class="line"><span>que mejor te <span class="serif">encaja.</span></span></span></h2>
+      <h2 class="reveal"><span class="line"><span>Elige tu <span class="serif">plan.</span></span></span></h2>
     </div>
-    <div class="stack" id="stack">
-      <article class="plan plan--dark" style="--i:0">
-        <div class="plan__top"><span class="plan__n">01</span><span class="mono">Plan 01 / 03 · Mínimo 3 meses</span></div>
-        <div class="plan__main">
-          <div class="plan__title"><h3>Arranque</h3><p class="plan__lead">Para poner orden y salir con buen pie.</p></div>
-          <div class="plan__cols">
-            <div><span class="legend">Incluye</span><ul><li>Identidad visual básica</li><li>Web corporativa de hasta 5 páginas</li><li>SEO inicial y alta en Google Business</li><li>Perfiles sociales listos para publicar</li><li>Informe mensual</li></ul></div>
-            <div class="plan__side"><div><span class="legend">Ideal para</span><p>Marcas nuevas o que necesitan poner orden en su imagen y su web.</p></div><a href="#contacto" class="btn"><span>Pedir propuesta</span><span>→</span></a></div>
+    <div class="tiers" id="tiers">
+      <div class="tiers__pin">
+        <div class="ladder">
+          <div class="ladder__rungs" role="group" aria-label="Planes">
+            <button class="rung" style="--h:38%" aria-controls="tier-1"><span class="rung__n">01</span><span class="mono">Arranque</span></button>
+            <button class="rung" style="--h:68%" aria-controls="tier-2"><span class="rung__n">02</span><span class="mono">Crecimiento</span></button>
+            <button class="rung" style="--h:100%" aria-controls="tier-3"><span class="rung__n">03</span><span class="mono">Escala</span></button>
           </div>
+          <div class="ladder__foot mono"><span>Empiezas donde estás</span><span>Subes cuando lo necesitas ↑</span></div>
         </div>
-      </article>
-      <article class="plan plan--accent" style="--i:1">
-        <div class="plan__top"><span class="plan__n">02</span><span class="mono">Plan 02 / 03 · Mínimo 3 meses, renovables</span></div>
-        <div class="plan__main">
-          <div class="plan__title"><h3>Crecimiento</h3><p class="plan__lead">Para marcas que ya venden y quieren vender más.</p></div>
-          <div class="plan__cols">
-            <div><span class="legend">Incluye</span><ul><li>Gestión de 2 redes sociales</li><li>Producción de contenido mensual</li><li>SEO mensual y artículos para el blog</li><li>Mejoras y mantenimiento de la web</li><li>Informe y reunión mensual</li></ul></div>
-            <div class="plan__side"><div><span class="legend">Ideal para</span><p>Marcas con web e identidad que necesitan constancia en redes y en Google.</p></div><a href="#contacto" class="btn"><span>Pedir propuesta</span><span>→</span></a></div>
-          </div>
+        <div class="tiers__body">
+          <article class="tier on" id="tier-1">
+            <div class="tier__meta mono fx"><span>Plan 01 / 03</span><span>Mínimo 3 meses</span></div>
+            <h3><span>Arranque</span></h3>
+            <p class="tier__lead fx" style="--k:1">Para poner orden y salir con buen pie.</p>
+            <div class="tier__cols">
+              <div class="fx" style="--k:2"><span class="legend">Incluye</span><ul><li>Identidad visual básica</li><li>Web corporativa</li><li>SEO inicial y alta en Google Business</li><li>Creación y configuración de redes sociales</li><li>Informe mensual</li></ul></div>
+              <div class="tier__side fx" style="--k:3"><div><span class="legend">Ideal para</span><p>Marcas nuevas o que necesitan poner orden en su imagen y su web.</p></div><a href="#contacto" class="btn"><span>Pedir propuesta</span><span>→</span></a></div>
+            </div>
+          </article>
+          <article class="tier" id="tier-2">
+            <div class="tier__meta mono fx"><span>Plan 02 / 03</span><span>Mínimo 3 meses, renovables</span></div>
+            <h3><span>Crecimiento</span></h3>
+            <p class="tier__lead fx" style="--k:1">Para marcas que ya venden y quieren vender más.</p>
+            <div class="tier__cols">
+              <div class="fx" style="--k:2"><span class="legend">Incluye</span><ul><li>Gestión de redes sociales</li><li>Producción de contenido mensual</li><li>SEO mensual</li><li>Mejoras y mantenimiento de la web</li><li>Informe y reunión mensual</li></ul></div>
+              <div class="tier__side fx" style="--k:3"><div><span class="legend">Ideal para</span><p>Marcas con web e identidad que necesitan constancia en redes y en Google.</p></div><a href="#contacto" class="btn"><span>Pedir propuesta</span><span>→</span></a></div>
+            </div>
+          </article>
+          <article class="tier" id="tier-3">
+            <div class="tier__meta mono fx"><span>Plan 03 / 03</span><span>Mínimo 3 meses</span></div>
+            <h3><span>Escala</span></h3>
+            <p class="tier__lead fx" style="--k:1">Todo el kiosko trabajando para tu marca.</p>
+            <div class="tier__cols">
+              <div class="fx" style="--k:2"><span class="legend">Incluye</span><ul><li>Branding completo y manual de marca</li><li>Web a medida o tienda online</li><li>Social media &amp; content</li><li>SEO técnico, local y de contenidos</li><li>Reuniones quincenales</li></ul></div>
+              <div class="tier__side fx" style="--k:3"><div><span class="legend">Ideal para</span><p>Empresas que quieren un equipo creativo senior sin contratarlo en plantilla.</p></div><a href="#contacto" class="btn"><span>Pedir propuesta</span><span>→</span></a></div>
+            </div>
+          </article>
         </div>
-      </article>
-      <article class="plan plan--light" style="--i:2">
-        <div class="plan__top"><span class="plan__n">03</span><span class="mono">Plan 03 / 03 · Mínimo 6 meses</span></div>
-        <div class="plan__main">
-          <div class="plan__title"><h3>Escala</h3><p class="plan__lead">Todo el kiosko trabajando para tu marca.</p></div>
-          <div class="plan__cols">
-            <div><span class="legend">Incluye</span><ul><li>Branding completo y manual de marca</li><li>Web a medida o tienda online</li><li>Social media &amp; content en 3 redes</li><li>SEO técnico, local y de contenidos</li><li>Reuniones quincenales</li></ul></div>
-            <div class="plan__side"><div><span class="legend">Ideal para</span><p>Empresas que quieren un equipo creativo senior sin contratarlo en plantilla.</p></div><a href="#contacto" class="btn"><span>Pedir propuesta</span><span>→</span></a></div>
-          </div>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- COMPROMISOS -->
-  <section class="sec wrap light">
-    <div class="sec__head">
-      <span class="mono mute">[ Compromisos ]</span>
-      <h2 class="reveal"><span class="line"><span>Lo que puedes esperar</span></span><span class="line"><span>de nosotros, <span class="serif">por escrito.</span></span></span></h2>
-    </div>
-    <div class="commit">
-      <div class="fade"><strong>24 h</strong><h3>Respuesta garantizada</h3><p>Contestamos cualquier consulta en menos de un día laborable.</p></div>
-      <div class="fade"><strong>3 meses</strong><h3>Sin permanencias largas</h3><p>Contratos trimestrales. Te quedas porque funciona, no por una cláusula.</p></div>
-      <div class="fade"><strong>100 %</strong><h3>Tus cuentas son tuyas</h3><p>Dominio, web, perfiles sociales y analítica siempre a tu nombre y con acceso total.</p></div>
-      <div class="fade"><strong>1 informe</strong><h3>Al mes, sin humo</h3><p>Resultados, aprendizajes y próximos pasos en una sola página.</p></div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="sec wrap" id="faq">
-    <div class="faq">
-      <div style="grid-column:1 / -1" class="sec__head">
-        <span class="mono mute">[ Preguntas ]</span>
-        <h2 class="reveal"><span class="line"><span>Antes de empezar.</span></span></h2>
-      </div>
-      <div class="faq__list">
-        <div class="qa"><button aria-expanded="false">¿Trabajáis con pequeñas empresas?<span class="plus"></span></button><div class="qa__a"><div><p>Sí. Adaptamos el alcance al momento de cada marca. Preferimos empezar con un servicio bien hecho que con cinco a medias.</p></div></div></div>
-        <div class="qa"><button aria-expanded="false">¿Cuándo se ven los primeros resultados?<span class="plus"></span></button><div class="qa__a"><div><p>En redes, las primeras señales llegan en pocas semanas. En SEO, el trabajo se nota a partir del tercer mes. La marca y la web se entregan en los plazos que acordamos al empezar.</p></div></div></div>
-        <div class="qa"><button aria-expanded="false">¿Puedo contratar un solo servicio?<span class="plus"></span></button><div class="qa__a"><div><p>Sí. Puedes empezar solo con branding, con la web, con redes o con SEO, y sumar más cuando lo necesites.</p></div></div></div>
-        <div class="qa"><button aria-expanded="false">¿Qué necesitáis para empezar?<span class="plus"></span></button><div class="qa__a"><div><p>Una llamada de 30 minutos para entender tu negocio y acceso de lectura a tus canales. Con eso preparamos una propuesta en una semana.</p></div></div></div>
       </div>
     </div>
   </section>
 
-  <!-- CONTACTO -->
+  <!-- CONTACTO (columna centrada con formulario sencillo) -->
   <section class="sec wrap contact" id="contacto">
-    <span class="mono mute">[ Contacto ] · Si has llegado hasta aquí, por algo será :)</span>
-    <h2 class="reveal" style="margin-top:28px"><span class="line"><span>¿Hablamos</span></span><span class="line"><span class="serif">de tu marca?</span></span></h2>
-    <div class="contact__grid">
-      <div class="contact__info">
-        <div style="display:grid;gap:12px">
-          <span class="legend">Escríbenos</span>
-          <span class="mail" id="mail">hola@elkiosko.agency</span>
-          <button class="copy" id="copy" type="button">Copiar email</button>
-        </div>
-        <div style="display:grid;gap:6px">
-          <span class="legend">Horario</span>
-          <span>Lunes a viernes · 9:00–18:00</span>
-        </div>
-        <div style="display:grid;gap:6px">
-          <span class="legend">Redes</span>
-          <span>Instagram · LinkedIn · Behance</span>
-        </div>
+    <div class="contact__col">
+      <div class="sec__head sec__head--stack">
+        <span class="mono mute">[ Contacto ] · Si has llegado hasta aquí, por algo será :)</span>
+        <h2 class="reveal"><span class="line"><span>¿Hablamos</span></span><span class="line"><span>de tu <span class="serif">marca?</span></span></span></h2>
       </div>
-      <form id="form" novalidate>
-        <div class="field"><label for="f-name">Nombre</label><input id="f-name" name="name" autocomplete="name" required></div>
-        <div class="field"><label for="f-mail">Email</label><input id="f-mail" name="email" type="email" autocomplete="email" required></div>
-        <div class="field"><label for="f-company">Empresa</label><input id="f-company" name="company" autocomplete="organization"></div>
-        <div class="field"><label for="f-budget">Presupuesto mensual</label>
-          <select id="f-budget" name="budget"><option>Menos de 1.000 €</option><option selected>1.000 – 3.000 €</option><option>3.000 – 6.000 €</option><option>Más de 6.000 €</option></select></div>
-        <div class="field full"><span class="legend">Me interesa</span>
-          <div class="pick">
-            <input type="checkbox" id="p1" name="svc" value="Branding"><label for="p1">Branding</label>
-            <input type="checkbox" id="p2" name="svc" value="Diseño y desarrollo web"><label for="p2">Diseño y desarrollo web</label>
-            <input type="checkbox" id="p3" name="svc" value="Social media & content"><label for="p3">Social media &amp; content</label>
-            <input type="checkbox" id="p4" name="svc" value="SEO"><label for="p4">SEO</label>
-          </div></div>
-        <div class="field full"><label for="f-msg">Cuéntanos tu proyecto</label><textarea id="f-msg" name="message" placeholder="Qué vendes, a quién y qué te gustaría conseguir en los próximos 6 meses."></textarea></div>
-        <div class="send">
-          <p class="note" id="note" role="status">Te respondemos en menos de 24 h laborables.</p>
+      <p class="contact__lead">Cuéntanos en qué te podemos ayudar y te responderemos en menos de 24 h laborables.</p>
+      <form class="brief" id="form" novalidate>
+        <div class="fld"><input id="f-name" name="name" autocomplete="name" placeholder="Nombre" aria-label="Nombre" required></div>
+        <div class="fld"><input id="f-mail" name="email" type="email" autocomplete="email" placeholder="Email" aria-label="Email" required></div>
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+        <div class="fld fld--full"><textarea id="f-msg" name="message" rows="4" placeholder="Cuéntanos tu proyecto" aria-label="Cuéntanos tu proyecto" required></textarea></div>
+        <label class="consent fld--full"><input type="checkbox" id="f-ok" name="privacy" required><span>He leído y acepto la <a href="privacidad.html">política de privacidad</a>.</span></label>
+        <p class="consent__info fld--full">Responsable: El Kiosko. Finalidad: responder a tu mensaje y, si lo pides, enviarte una propuesta. No cedemos tus datos. Puedes acceder a ellos, rectificarlos o suprimirlos escribiéndonos. Más información en la <a href="privacidad.html">política de privacidad</a>.</p>
+        <div class="brief__foot">
           <button class="btn" type="submit"><span>Enviar mensaje</span><span>→</span></button>
+          <p class="note" id="note" role="status"></p>
+        </div>
+        <div class="brief__done" aria-live="polite">
+          <span class="mono" style="color:var(--accent)">Mensaje enviado ✓</span>
+          <h3 id="done-title">Gracias.</h3>
+          <p id="done-text">Te responderemos lo antes posible.</p>
         </div>
       </form>
     </div>
   </section>
 </main>
 
-<footer class="wrap">
+<footer class="wrap" itemscope itemtype="https://schema.org/ProfessionalService">
   <div class="foot">
-    <div><span class="mono mute">EL KIOSKO® Agencia de marketing</span><p style="max-width:36ch;margin-top:10px">Branding, web, social media y SEO para empresas que prefieren resultados a ruido.</p></div>
-    <div><span class="mono mute">Navegación</span><a href="#agencia">Agencia</a><a href="#servicios">Servicios</a><a href="#metodo">Método</a><a href="#planes">Planes</a><a href="#contacto">Contacto</a></div>
-    <div><span class="mono mute">Legal</span><a href="#inicio">Aviso legal</a><a href="#inicio">Privacidad</a><a href="#inicio">Cookies</a><span class="mute" style="margin-top:12px">© 2026 El Kiosko</span><button id="replay" type="button">Ver intro de nuevo ↺</button></div>
+    <div class="foot__brand">
+      <p class="mono mute"><span itemprop="name">El Kiosko</span>® · Agencia de marketing digital</p>
+      <p class="foot__pitch" itemprop="description">Agencia de marketing digital en Málaga especializada en <strong>branding</strong>, <strong>diseño web</strong>, <strong>gestión de redes sociales</strong> y <strong>posicionamiento SEO</strong> para pymes y marcas que quieren crecer.</p>
+      <a class="foot__cta" href="#contacto">Pide tu propuesta <span>→</span></a>
+    </div>
+    <nav class="foot__col" aria-label="Servicios">
+      <h2 class="foot__h mono mute">Servicios</h2>
+      <a href="#servicios">Branding y diseño de marca</a>
+      <a href="#servicios">Diseño y desarrollo web</a>
+      <a href="#servicios">Gestión de redes sociales</a>
+      <a href="#servicios">Posicionamiento SEO</a>
+    </nav>
+    <nav class="foot__col" aria-label="Agencia">
+      <h2 class="foot__h mono mute">Agencia</h2>
+      <a href="#agencia">Quiénes somos</a>
+      <a href="#metodo">Método</a>
+      <a href="#sectores">Sectores</a>
+      <a href="#planes">Planes y precios</a>
+    </nav>
+    <div class="foot__col">
+      <h2 class="foot__h mono mute">Contacto</h2>
+      <address class="foot__nap">
+        <a href="mailto:elkioskoagency@gmail.com" itemprop="email">elkioskoagency@gmail.com</a>
+        <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress"><span itemprop="addressLocality">Málaga</span>, <span itemprop="addressCountry">España</span></span>
+      </address>
+      <div class="foot__social"><a href="https://www.instagram.com/kiosko.agency/" target="_blank" rel="noopener">Instagram</a></div>
+    </div>
+  </div>
+  <div class="foot__bar">
+    <span class="mute">© 2026 El Kiosko. Todos los derechos reservados.</span>
+    <nav class="foot__legal" aria-label="Legal"><a href="aviso-legal.html">Aviso legal</a><a href="privacidad.html">Privacidad</a><a href="cookies.html">Cookies</a></nav>
+    <button id="replay" type="button">Ver intro de nuevo ↺</button>
   </div>
   <div class="wordmark" id="wordmark" aria-hidden="true"><span>K</span><span>I</span><span>O</span><span>S</span><span>K</span><span>O</span></div>
+  <!-- Datos estructurados para Google (rellenar los campos entre corchetes antes de publicar) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "El Kiosko",
+    "alternateName": "El Kiosko Agencia de Marketing",
+    "description": "Agencia de marketing digital especializada en branding, diseño y desarrollo web, social media y posicionamiento SEO para pymes.",
+    "url": "https://claudiakora23-cell.github.io/el-kiosko/",
+    "logo": "https://claudiakora23-cell.github.io/el-kiosko/kiosko.jpg",
+    "image": "https://claudiakora23-cell.github.io/el-kiosko/kiosko.jpg",
+    "email": "elkioskoagency@gmail.com",
+    "address": { "@type": "PostalAddress", "streetAddress": "[calle y número]", "postalCode": "29010", "addressLocality": "Málaga", "addressRegion": "Málaga", "addressCountry": "ES" },
+    "areaServed": [{ "@type": "City", "name": "Málaga" }, { "@type": "Country", "name": "España" }],
+    "openingHours": "Mo-Fr 09:00-18:00",
+    "priceRange": "€€",
+    "sameAs": ["https://www.instagram.com/kiosko.agency/"],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Servicios de marketing digital",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Branding y diseño de marca" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Diseño y desarrollo web" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Gestión de redes sociales y contenido" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Posicionamiento SEO" } }
+      ]
+    }
+  }
+  </script>
 </footer>
 
 <script>
@@ -832,45 +925,30 @@ h1,h2,h3,.logo,.loader__count,.menu a.big,.marquee__row span,.wordmark,.path,.tv
     addEventListener('mouseover', e => cur.classList.toggle('big', !!e.target.closest(hot)));
   }
 
-  /* Preguntas frecuentes */
-  $$('.qa button').forEach(b => b.addEventListener('click', () => {
-    const qa = b.parentElement, open = !qa.classList.contains('open');
-    qa.classList.toggle('open', open); b.setAttribute('aria-expanded', open);
-  }));
-
-  /* Copiar email */
-  const copy = $('#copy');
-  copy.addEventListener('click', () => {
-    const txt = $('#mail').textContent;
-    const done = () => { copy.textContent = 'Copiado'; setTimeout(() => copy.textContent = 'Copiar email', 1800); };
-    const fallback = () => { const s = getSelection(), rg = document.createRange(); rg.selectNodeContents($('#mail')); s.removeAllRanges(); s.addRange(rg); copy.textContent = 'Seleccionado'; };
-    navigator.clipboard?.writeText(txt).then(done, fallback) ?? fallback();
-  });
-
-  /* Kiosko: vitrinas que despliegan sus subservicios */
+  /* Kiosko: carteles que despliegan un póster con sus subservicios */
   const SVC = {
-    web: { kick: 'Vitrina 01 · Web', title: 'Diseño y desarrollo web', lead: 'Webs rápidas, claras y pensadas para convertir visitas en clientes.', items: [
+    web: { kick: '<span>El Kiosko</span><span>N.º 01 · Web</span>', title: 'Diseño y desarrollo web', lead: 'Webs rápidas, claras y pensadas para convertir visitas en clientes.', items: [
       ['Diseño UX/UI', 'Estructura y diseño pensados para tu cliente.'],
       ['Webs corporativas', 'A medida y fáciles de actualizar.'],
       ['Tiendas online', 'Shopify y WooCommerce listas para vender.'],
       ['Landing pages', 'Páginas enfocadas a conversión.'],
       ['Desarrollo a medida', 'Funcionalidades hechas para tu negocio.'],
       ['Mantenimiento', 'Actualizaciones, copias de seguridad y soporte.'] ] },
-    branding: { kick: 'Vitrina 02 · Branding', title: 'Branding', lead: 'Una identidad que se reconoce a primera vista y se recuerda.', items: [
+    branding: { kick: '<span>El Kiosko</span><span>N.º 02 · Branding</span>', title: 'Branding', lead: 'Una identidad que se reconoce a primera vista y se recuerda.', items: [
       ['Naming', 'El nombre de tu marca, con dominio y registro.'],
       ['Logotipo', 'Símbolo, tipografía y versiones para cada uso.'],
       ['Identidad visual', 'Colores, tipografías, iconos y estilo de imagen.'],
       ['Manual de marca', 'Las reglas para que todo se vea coherente.'],
       ['Tono de voz', 'Cómo habla tu marca y qué palabras usa.'],
       ['Packaging y papelería', 'Etiquetas, cajas, tarjetas y aplicaciones.'] ] },
-    redes: { kick: 'Vitrina 03 · Social media', title: 'Social media & content', lead: 'Contenido con criterio y una comunidad que crece de verdad.', items: [
+    redes: { kick: '<span>El Kiosko</span><span>N.º 03 · Social media</span>', title: 'Social media & content', lead: 'Contenido con criterio y una comunidad que crece de verdad.', items: [
       ['Estrategia de contenidos', 'Qué contar, a quién y en qué red.'],
       ['Calendario editorial', 'Publicaciones planificadas mes a mes.'],
       ['Foto y vídeo', 'Producción de reels, carruseles y sesiones.'],
       ['Copywriting', 'Textos con el tono de tu marca.'],
       ['Community management', 'Respuestas, mensajes y gestión diaria.'],
       ['Informe mensual', 'Alcance, interacción y resultados, sin humo.'] ] },
-    seo: { kick: 'Vitrina 04 · SEO', title: 'SEO', lead: 'Que te encuentren en Google quienes ya buscan lo que ofreces.', items: [
+    seo: { kick: '<span>El Kiosko</span><span>N.º 04 · SEO</span>', title: 'SEO', lead: 'Que te encuentren en Google quienes ya buscan lo que ofreces.', items: [
       ['Auditoría SEO', 'Qué falla y qué priorizar.'],
       ['SEO técnico', 'Velocidad, indexación y estructura.'],
       ['Palabras clave', 'Las búsquedas que de verdad te traen clientes.'],
@@ -905,27 +983,65 @@ h1,h2,h3,.logo,.loader__count,.menu a.big,.marquee__row span,.wordmark,.path,.tv
   $$('.vit__cta').forEach(a => a.addEventListener('click', closeAll));
   addEventListener('keydown', e => { if (e.key === 'Escape') closeAll(); });
 
-  /* Planes: cuanto más cubre la siguiente tarjeta, más se encoge y oscurece la de debajo */
-  const plans = $$('.plan');
-  const onPlans = () => plans.forEach((p, i) => {
-    const next = plans[i + 1];
-    const r = p.getBoundingClientRect();
-    const c = next ? Math.min(Math.max(1 - (next.getBoundingClientRect().top - r.top) / r.height, 0), 1) : 0;
-    p.style.setProperty('--c', c.toFixed(3));
-    if (r.top < innerHeight * .7) p.classList.add('is-in');
-  });
-  addEventListener('scroll', onPlans, { passive: true });
-  addEventListener('resize', onPlans);
-  onPlans();
+  /* Planes: el avance dentro de #tiers llena las columnas (0 → 3) y decide qué plan se ve */
+  const tiers = $('#tiers'), rungs = $$('.rung'), cards = $$('.tier');
+  const onTiers = () => {
+    if (!wide.matches) { cards.forEach(c => { c.classList.add('on'); c.classList.remove('past'); c.removeAttribute('aria-hidden'); }); return; }
+    const r = tiers.getBoundingClientRect();
+    const p = Math.min(Math.max(-r.top / (r.height - innerHeight), 0), 1) * 3;
+    const cur = Math.min(Math.floor(p), 2);
+    rungs.forEach((b, i) => {
+      const f = Math.min(Math.max(p - i, 0), 1);
+      b.style.setProperty('--f', f.toFixed(3));
+      b.classList.toggle('on', i === cur && f < 1);
+      b.classList.toggle('done', f >= 1);
+      b.setAttribute('aria-pressed', i === cur);
+    });
+    cards.forEach((c, i) => {
+      c.classList.toggle('on', i === cur);
+      c.classList.toggle('past', i < cur);
+      c.setAttribute('aria-hidden', i !== cur);
+    });
+  };
+  /* al pulsar una columna, baja hasta la mitad de su tramo */
+  rungs.forEach((b, i) => b.addEventListener('click', () => {
+    const top = tiers.getBoundingClientRect().top + scrollY + (i + .5) / 3 * (tiers.offsetHeight - innerHeight);
+    scrollTo({ top, behavior: reduce ? 'auto' : 'smooth' });
+  }));
+  addEventListener('scroll', onTiers, { passive: true });
+  addEventListener('resize', onTiers);
+  onTiers();
 
-  /* Formulario (pendiente de conectar a un servicio de envío) */
-  const form = $('#form'), note = $('#note');
-  form.addEventListener('submit', e => {
+  /* Contacto: el texto del proyecto crece al escribir; si falta algo, la nota dice qué */
+  const form = $('#form'), note = $('#note'), fName = $('#f-name'), fMail = $('#f-mail'), fMsg = $('#f-msg');
+  const valid = [[fName, () => fName.value.trim(), 'Escribe tu nombre para continuar.'], [fMail, () => fMail.value.trim() && fMail.checkValidity(), 'Revisa el email: parece incompleto.'], [fMsg, () => fMsg.value.trim(), 'Cuéntanos un poco de tu proyecto.'], [$('#f-ok'), () => $('#f-ok').checked, 'Acepta la política de privacidad para enviar el mensaje.']];
+  valid.forEach(([el, ok]) => el.addEventListener('input', () => {
+    el.closest('.fld')?.classList.toggle('ok', !!ok());
+    if (el === fMsg) { fMsg.style.height = 'auto'; fMsg.style.height = fMsg.scrollHeight + 'px'; }
+  }));
+  /* el mensaje se envía con FormSubmit a elkioskoagency@gmail.com; _honey frena a los bots */
+  const btn = form.querySelector('[type=submit]');
+  form.addEventListener('submit', async e => {
     e.preventDefault();
-    const name = $('#f-name').value.trim(), mail = $('#f-mail');
-    if (!name) { note.textContent = 'Escribe tu nombre para continuar.'; $('#f-name').focus(); return; }
-    if (!mail.value.trim() || !mail.checkValidity()) { note.textContent = 'Revisa el email: parece incompleto.'; mail.focus(); return; }
-    note.textContent = `Gracias, ${name}. Formulario de demostración: aún no está conectado a un correo.`;
+    const miss = valid.find(([, ok]) => !ok());
+    if (miss) { note.textContent = miss[2]; miss[0].focus(); return; }
+    btn.disabled = true; note.textContent = 'Enviando…';
+    try {
+      const r = await fetch('https://formsubmit.co/ajax/elkioskoagency@gmail.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ nombre: fName.value.trim(), email: fMail.value.trim(), mensaje: fMsg.value.trim(), _honey: form._honey.value, _replyto: fMail.value.trim(), _subject: `Nuevo mensaje de ${fName.value.trim()} desde la web`, _template: 'table', _captcha: 'false' })
+      });
+      if (!r.ok) throw new Error(r.status);
+      $('#done-title').textContent = `Gracias, ${fName.value.trim()}.`;
+      $('#done-text').textContent = `Te responderemos lo antes posible a ${fMail.value.trim()}.`;
+      note.textContent = '';
+      form.classList.add('sent');
+    } catch {
+      note.innerHTML = 'No se ha podido enviar. Escríbenos a <a href="mailto:elkioskoagency@gmail.com">elkioskoagency@gmail.com</a>.';
+    } finally { btn.disabled = false; }
   });
 })();
 </script>
+</body>
+</html>

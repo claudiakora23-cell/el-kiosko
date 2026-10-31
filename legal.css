@@ -1,0 +1,21 @@
+/* Páginas legales: mismos tokens y tipografías que index.html, en una columna de lectura */
+:root{--ink:#0B0B0B;--ink-2:#161616;--line:#2C2C2C;--mute:#A0A0A0;--bone:#F6F5F0;--accent:#A78BFA;--f-display:"Montserrat","Helvetica Neue",Arial,sans-serif;--f-body:"Inter","Helvetica Neue",Arial,sans-serif;--pad:clamp(16px,4vw,56px);color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--bone);font-family:var(--f-body);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration-color:var(--accent);text-underline-offset:3px}
+a:hover{color:var(--accent)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px var(--pad);border-bottom:1px solid var(--line)}
+.logo{font-family:var(--f-display);font-weight:600;letter-spacing:.2em;text-decoration:none}
+.mono{font-family:var(--f-display);font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+main{width:min(100% - 2 * var(--pad),760px);margin:0 auto;padding-block:clamp(56px,9vw,120px)}
+h1{font-family:var(--f-display);font-size:clamp(2.2rem,5vw,3.6rem);font-weight:700;letter-spacing:-.03em;line-height:1.05;margin:16px 0 10px}
+h1 em{font-style:italic;color:var(--accent)}
+h2{font-family:var(--f-display);font-size:1.15rem;font-weight:700;letter-spacing:-.01em;margin:48px 0 10px;padding-top:28px;border-top:1px solid var(--line)}
+p,li{color:#D9D8D3}
+ul{padding-left:1.2em}
+table{width:100%;border-collapse:collapse;font-size:.92rem;margin:12px 0}
+th,td{text-align:left;padding:10px 12px 10px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--f-display);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+/* Datos que faltan por rellenar */
+.tbd{color:var(--accent);background:rgba(167,139,250,.12);border-radius:4px;padding:0 4px}
+.legal-nav{display:flex;flex-wrap:wrap;gap:8px 24px;margin-top:64px;padding-top:24px;border-top:1px solid var(--line)}
