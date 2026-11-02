@@ -444,7 +444,7 @@ h1,h2,h3,.logo,.loader__count,.menu a.big,.marquee__row span,.wordmark,.path,.tv
 .vit.open .vit__tag{animation-play-state:paused}
 .vit:focus-visible{outline:none}
 .vit:focus-visible .vit__tag{outline:2px solid var(--bone);outline-offset:3px}
-@container (max-width:460px){.vit__t{font-size:calc(var(--fs) * 1.25)}.vit__n span+span{display:none}}
+@container (max-width:460px){.vit{width:calc(var(--w) * 1.25)}.vit__tag{grid-template-rows:1fr;place-items:center;padding:1cqw;text-align:center}.vit__n,.vit__more{display:none}.vit__t{font-size:calc(var(--fs) * 1.45);letter-spacing:.01em}}
 .js .vit{opacity:0;transition:opacity .8s;transition-delay:calc(var(--d) + 1s)}
 .js.loaded .vit{opacity:1}
 
@@ -474,6 +474,25 @@ h1,h2,h3,.logo,.loader__count,.menu a.big,.marquee__row span,.wordmark,.path,.tv
 @container (max-width:460px){.vit__info[data-svc]{left:3%;right:auto;top:4%;bottom:auto;width:94cqw}}
 @media (prefers-reduced-motion:reduce){.vit__tag{animation:none}.vit__info.open{animation:none}.js .vit{opacity:1}.js .kiosk img{opacity:1;transform:none}.js .kiosk__sign{opacity:1;transform:none}}
 
+/* En táctil no hay puntero: lo que queda en el centro de la pantalla al bajar (.lit) se ilumina igual que al pasar el ratón */
+@media (hover:none){
+  .svc.lit::before{transform:scaleY(1);transform-origin:top}
+  .svc.lit .svc__in,.svc.lit .svc__tag{color:#0B0B0B}
+  .svc.lit .svc__body p{color:rgba(11,11,11,.82)}
+  .svc.lit .chips span{border-color:rgba(11,11,11,.4)}
+  .svc__in{transition:color .5s var(--ease),padding .6s var(--ease)}
+  .svc.lit .svc__in{padding-inline:14px}
+  .pillar{transform-origin:left center}
+  .js .pillar.fade.is-in.lit,.pillar.lit{transform:scale(1.03)}
+  .pillar.lit p{color:var(--bone)}
+  .card.lit{border-color:#4A463F}
+  .card.lit::after{opacity:1}
+  /* las pizarras se encienden por turnos para que se vea que se pueden tocar */
+  .vit__tag{animation:sway 4.2s ease-in-out infinite,hint 8s ease-in-out infinite;animation-delay:calc(var(--d) * -5),calc(var(--d) * 4 + 1.5s)}
+  .vit.open .vit__tag{animation-play-state:paused}
+}
+@keyframes hint{0%,16%,100%{border-color:#B8B8B8 #6E6E6E #555 #9A9A9A}6%,10%{border-color:var(--accent)}}
+@media (max-width:760px){#planes .sec__head{margin-bottom:28px}}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{transition-duration:.01ms!important;animation:none!important}
   .js .reveal .line>span,.js .hero h1 .line>span,.js .wordmark span{transform:none}
@@ -1011,6 +1030,17 @@ h1,h2,h3,.logo,.loader__count,.menu a.big,.marquee__row span,.wordmark,.path,.tv
   addEventListener('scroll', onTiers, { passive: true });
   addEventListener('resize', onTiers);
   onTiers();
+
+  /* En táctil, la fila de servicio, el pilar o la tarjeta que cruza el centro de la pantalla se ilumina (.lit) */
+  if (matchMedia('(hover:none)').matches) {
+    const spots = $$('.svc, .pillar, .card');
+    const onSpots = () => {
+      const mid = innerHeight / 2;
+      spots.forEach(el => { const r = el.getBoundingClientRect(); el.classList.toggle('lit', r.top < mid && r.bottom > mid); });
+    };
+    addEventListener('scroll', onSpots, { passive: true });
+    onSpots();
+  }
 
   /* Contacto: el texto del proyecto crece al escribir; si falta algo, la nota dice qué */
   const form = $('#form'), note = $('#note'), fName = $('#f-name'), fMail = $('#f-mail'), fMsg = $('#f-msg');
