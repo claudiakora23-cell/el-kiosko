@@ -4,7 +4,7 @@ Landing page de **El Kiosko**, agencia de marketing en Málaga. Servicios (solo 
 
 ## Archivos
 - `index.html`: toda la página (estilos y scripts en línea), con documento HTML completo (`<!doctype>`, `<head>` con metadatos Open Graph y `canonical`).
-- `kiosko.jpg`: ilustración lineal del kiosko (negro sobre blanco). En la web se invierte con `filter: invert(1)` y `mix-blend-mode: screen` para verse en blanco sobre negro.
+- `kiosko-lineas.png`: la ilustración del kiosko en líneas claras sobre fondo transparente; es la que usa el hero (sin filtros ni fundidos, para que el fondo sea idéntico al de la página en cualquier móvil). Se generó a partir de `kiosko.jpg` (negro sobre blanco), que se queda como imagen para compartir en redes (`og:image`) y datos de Google.
 - `aviso-legal.html`, `privacidad.html`, `cookies.html` + `legal.css`: páginas legales (con `noindex`). Titular: persona física con nombre comercial El Kiosko.
 - `_version-*/`: copias de versiones anteriores; no se publican.
 
