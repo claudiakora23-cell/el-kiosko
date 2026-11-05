@@ -245,11 +245,24 @@ section{position:relative}
 .kpi b{font-weight:500;color:var(--bone)}
 @media (max-width:860px){
   .hscroll__pin{position:static;height:auto;padding-block:clamp(90px,14vw,190px)}
-  .track{flex-direction:column;width:auto;transform:none!important}
-  .card{width:100%;aspect-ratio:auto;gap:48px}
-  .hs-ctl{display:none}
+  /* en móvil los sectores pasan de lado: con el dedo o con las flechas */
+  .track{width:auto;gap:12px;transform:none!important;will-change:auto;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none}
+  .track::-webkit-scrollbar{display:none}
+  .card{flex:0 0 100%;aspect-ratio:auto;gap:40px;padding-inline:30px;scroll-snap-align:center}
 }
 .hs-ctl{display:grid;gap:12px;justify-items:end}
+.hs-wrap{position:relative}
+.hs-arrow{display:none}
+@media (max-width:860px){
+  .hs-ctl{display:none}
+  .hs-arrow{display:grid;place-items:center;position:absolute;z-index:2;top:50%;width:36px;height:36px;margin-top:-18px;border:1px solid var(--line);border-radius:50%;background:var(--ink);color:var(--bone);font:inherit;font-size:1rem;line-height:1;cursor:pointer;transition:opacity .3s}
+  /* zona de toque más grande que el círculo */
+  .hs-arrow::after{content:"";position:absolute;inset:-6px}
+  .hs-arrow--prev{left:4px}
+  .hs-arrow--next{right:4px}
+  .hs-arrow:disabled{opacity:.3;cursor:default}
+  .hs-arrow:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+}
 .card--cta{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 .card--cta p,.card--cta .mono,.card--cta .kpi b{color:var(--accent-ink)}
 .card--cta .kpi{border-color:rgba(10,10,10,.25)}
@@ -382,7 +395,27 @@ footer{border-top:1px solid var(--line);padding-top:56px;overflow:hidden}
   .js .tier.on .fx{opacity:1;transform:none;transition-delay:calc(.15s + var(--k,0) * 60ms)}
 }
 @media (min-width:861px) and (max-height:760px){.tier h3{font-size:clamp(2.3rem,4.4vw,4rem)}.tier__cols ul{gap:5px}}
-@media (max-width:860px){.tiers{height:auto}.tiers__pin{position:static;height:auto;display:block;padding:0}.ladder{display:none}.tiers__body{gap:56px}.tier__cols{grid-template-columns:1fr}}
+/* En móvil: tres escalones que se pueden pulsar y debajo una sola tarjeta con el plan elegido */
+@media (max-width:860px){
+  .tiers{height:auto}
+  .tiers__pin{position:static;height:auto;display:block;padding:0}
+  .ladder{display:block;height:auto;margin-bottom:12px}
+  .ladder__rungs{height:136px;gap:8px}
+  .ladder__foot{display:none}
+  .rung{height:max(var(--h),72px);padding:12px 10px;border-radius:14px;gap:6px}
+  .rung::before{transition:transform .5s var(--ease-out)}
+  .rung__n{font-size:1.5rem}
+  .rung .mono{font-size:.6rem;letter-spacing:.04em}
+  .tier{background:var(--ink-2);border:1px solid var(--line);border-radius:18px;padding:24px 22px;gap:16px}
+  .js .tier:not(.on){display:none}
+  .js .tier.on{animation:tierIn .5s var(--ease-out)}
+  .tier__meta{justify-content:flex-end;padding-bottom:12px}
+  .tier__meta span:first-child{display:none}
+  .tier__cols{grid-template-columns:1fr;gap:20px}
+  .tier__side>div:first-child{display:none}
+  .tier__side .btn{justify-self:stretch;justify-content:space-between}
+}
+@keyframes tierIn{from{opacity:0;transform:translateY(10px)}}
 @media (prefers-reduced-motion:reduce){.rung,.js .tier h3>span,.js .tier .fx{transition:none}}
 #replay{justify-self:start;text-align:left;color:var(--mute);transition:color .3s}
 #replay:hover{color:var(--accent)}
@@ -423,6 +456,8 @@ h1,h2,h3,.logo,.loader__count,.menu a.big,.marquee__row span,.wordmark,.path,.tv
 .js .kiosk__sign{opacity:0;transform:translateY(24px);transition:opacity 1.4s .2s,transform 1.4s .2s var(--ease-out)}
 .js.loaded .kiosk__sign{opacity:1;transform:none}
 @media (max-width:900px){.hero__copy,.kiosk{grid-column:1 / -1}.kiosk{margin-block:0}}
+/* en móvil, arriba solo el eslogan y el kiosko */
+@media (max-width:860px){.hero__meta,.hero__copy>.mono{display:none}}
 
 /* Pizarras de kiosko: tablero negro con marco metálico, cada una a su altura; las colgadas se balancean y la de caballete apenas se mece */
 .vit{position:absolute;left:var(--x);top:var(--y);width:var(--w);aspect-ratio:var(--ar);translate:-50% 0;z-index:2}
@@ -663,7 +698,10 @@ h1,h2,h3,.logo,.loader__count,.menu a.big,.marquee__row span,.wordmark,.path,.tv
         </div>
         <div class="hs-ctl"><span class="mono mute">Sigue bajando →</span><div class="bar" aria-hidden="true"><i id="bar"></i></div></div>
       </div>
-      <div class="wrap"><div class="track" id="track">
+      <div class="wrap hs-wrap">
+        <button class="hs-arrow hs-arrow--prev" id="hsPrev" type="button" aria-label="Sector anterior">←</button>
+        <button class="hs-arrow hs-arrow--next" id="hsNext" type="button" aria-label="Sector siguiente">→</button>
+        <div class="track" id="track">
         <article class="card" data-cursor="Sector"><span class="mono mute">Hostelería</span><div style="display:grid;gap:16px"><h3>Restaurantes y hoteles</h3><p>Llenar mesas entre semana y vender habitaciones sin depender de las plataformas.</p></div><div class="kpi mono"><span class="mute">KPI</span><b>Reservas directas</b></div></article>
         <article class="card" data-cursor="Sector"><span class="mono mute">Moda</span><div style="display:grid;gap:16px"><h3>Moda y lifestyle</h3><p>Marcas con estética propia que necesitan vender online sin perder el tono.</p></div><div class="kpi mono"><span class="mute">KPI</span><b>Ventas online</b></div></article>
         <article class="card" data-cursor="Sector"><span class="mono mute">Salud</span><div style="display:grid;gap:16px"><h3>Clínicas y estética</h3><p>Comunicación que transmite confianza y llena la agenda, cumpliendo la normativa sanitaria.</p></div><div class="kpi mono"><span class="mute">KPI</span><b>Citas agendadas</b></div></article>
@@ -869,6 +907,19 @@ h1,h2,h3,.logo,.loader__count,.menu a.big,.marquee__row span,.wordmark,.path,.tv
     hs.style.height = (dist + innerHeight) + 'px';
   };
 
+  /* Sectores en móvil: las flechas pasan de tarjeta en tarjeta y se apagan al llegar a los extremos */
+  const hsPrev = $('#hsPrev'), hsNext = $('#hsNext');
+  const hsArrows = () => {
+    hsPrev.disabled = track.scrollLeft <= 2;
+    hsNext.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+  };
+  const hsGo = dir => track.scrollBy({ left: dir * (track.firstElementChild.offsetWidth + parseFloat(getComputedStyle(track).columnGap)), behavior: reduce ? 'auto' : 'smooth' });
+  hsPrev.addEventListener('click', () => hsGo(-1));
+  hsNext.addEventListener('click', () => hsGo(1));
+  track.addEventListener('scroll', hsArrows, { passive: true });
+  addEventListener('resize', hsArrows);
+  hsArrows();
+
   /* Marquesina con inercia según la velocidad de scroll */
   const rows = $$('.marquee__row').map(el => ({ el, dir: +el.dataset.dir, x: 0 }));
   let lastY = scrollY, vel = 0;
@@ -1005,13 +1056,10 @@ h1,h2,h3,.logo,.loader__count,.menu a.big,.marquee__row span,.wordmark,.path,.tv
 
   /* Planes: el avance dentro de #tiers llena las columnas (0 → 3) y decide qué plan se ve */
   const tiers = $('#tiers'), rungs = $$('.rung'), cards = $$('.tier');
-  const onTiers = () => {
-    if (!wide.matches) { cards.forEach(c => { c.classList.add('on'); c.classList.remove('past'); c.removeAttribute('aria-hidden'); }); return; }
-    const r = tiers.getBoundingClientRect();
-    const p = Math.min(Math.max(-r.top / (r.height - innerHeight), 0), 1) * 3;
-    const cur = Math.min(Math.floor(p), 2);
+  let picked = 0; /* en móvil, el plan elegido al tocar un escalón */
+  const paint = (cur, fill) => {
     rungs.forEach((b, i) => {
-      const f = Math.min(Math.max(p - i, 0), 1);
+      const f = fill(i);
       b.style.setProperty('--f', f.toFixed(3));
       b.classList.toggle('on', i === cur && f < 1);
       b.classList.toggle('done', f >= 1);
@@ -1023,8 +1071,15 @@ h1,h2,h3,.logo,.loader__count,.menu a.big,.marquee__row span,.wordmark,.path,.tv
       c.setAttribute('aria-hidden', i !== cur);
     });
   };
+  const onTiers = () => {
+    if (!wide.matches) { paint(picked, i => +(i === picked)); return; }
+    const r = tiers.getBoundingClientRect();
+    const p = Math.min(Math.max(-r.top / (r.height - innerHeight), 0), 1) * 3;
+    paint(Math.min(Math.floor(p), 2), i => Math.min(Math.max(p - i, 0), 1));
+  };
   /* al pulsar una columna, baja hasta la mitad de su tramo */
   rungs.forEach((b, i) => b.addEventListener('click', () => {
+    if (!wide.matches) { picked = i; onTiers(); return; }
     const top = tiers.getBoundingClientRect().top + scrollY + (i + .5) / 3 * (tiers.offsetHeight - innerHeight);
     scrollTo({ top, behavior: reduce ? 'auto' : 'smooth' });
   }));
